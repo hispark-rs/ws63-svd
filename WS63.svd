@@ -1446,5 +1446,23 @@
       </registers>
     </peripheral>
 
+    <!-- ============================================================ -->
+    <!-- SDMA: Secure DMA (Base: 0x520A0000) - v151                     -->
+    <!-- ============================================================ -->
+    <peripheral derivedFrom="DMA">
+      <name>SDMA</name>
+      <description>Secure DMA controller (4 channels, same layout as MDMA v151). Channels logically mapped as 8-11.</description>
+      <baseAddress>0x520A0000</baseAddress>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- ULP_GPIO: Ultra-Low-Power GPIO (Base: 0x57030000)             -->
+    <!-- ============================================================ -->
+    <peripheral derivedFrom="GPIO0">
+      <name>ULP_GPIO</name>
+      <description>Ultra-low-power GPIO controller (8 pins, GPIO[107:114]). Same register layout as GPIO0.</description>
+      <baseAddress>0x57030000</baseAddress>
+    </peripheral>
+
   </peripherals>
 </device>
