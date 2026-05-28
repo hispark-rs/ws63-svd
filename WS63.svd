@@ -1,0 +1,1222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device schemaVersion="1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
+  <name>WS63</name>
+  <version>1.0</version>
+  <description>HiSilicon WS63 Wi-Fi/BLE/SLE Combo SoC</description>
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>32</size>
+  <access>read-write</access>
+  <resetValue>0x0</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+
+  <cpu>
+    <name>custom_riscv</name>
+    <revision>r0p0</revision>
+    <endian>little</endian>
+    <mpuPresent>true</mpuPresent>
+    <fpuPresent>false</fpuPresent>
+    <nvicPrioBits>3</nvicPrioBits>
+    <vendorSystickConfig>false</vendorSystickConfig>
+  </cpu>
+
+  <peripherals>
+
+    <!-- ============================================================ -->
+    <!-- SYS_CTL1: Interrupt Controller (Base: 0x44000000)           -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>SYS_CTL1</name>
+      <description>System Control 1 - Interrupt Controller</description>
+      <baseAddress>0x44000000</baseAddress>
+      <size>32</size>
+      <access>read-write</access>
+      <registers>
+        <register>
+          <name>NMI_INT</name>
+          <displayName>NMI_INT</displayName>
+          <description>WDT interrupt query and NMI interrupt configuration register</description>
+          <addressOffset>0x0040</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>tee_nmi_int</name>
+              <description>Software NMI interrupt configuration. 0: pull low CPU NMI soft interrupt; 1: pull high CPU NMI soft interrupt</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>wdt_int</name>
+              <description>Watchdog interrupt query. 0: WDT interrupt invalid; 1: WDT interrupt valid</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SOFT_INT_EN</name>
+          <displayName>SOFT_INT_EN</displayName>
+          <description>CPU soft interrupt enable register</description>
+          <addressOffset>0x0150</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>soft_int0_en</name>
+              <description>CPU soft interrupt 0 enable. 0: disabled; 1: enabled</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>soft_int1_en</name>
+              <description>CPU soft interrupt 1 enable. 0: disabled; 1: enabled</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>soft_int2_en</name>
+              <description>CPU soft interrupt 2 enable. 0: disabled; 1: enabled</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>soft_int3_en</name>
+              <description>CPU soft interrupt 3 enable. 0: disabled; 1: enabled</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SOFT_INT_SET</name>
+          <displayName>SOFT_INT_SET</displayName>
+          <description>CPU soft interrupt set register (self-clearing)</description>
+          <addressOffset>0x0154</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>soft_int0_set</name>
+              <description>CPU soft interrupt 0 set. 0: no effect; 1: set effective</description>
+              <bitRange>[0:0]</bitRange>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>soft_int1_set</name>
+              <description>CPU soft interrupt 1 set. 0: no effect; 1: set effective</description>
+              <bitRange>[1:1]</bitRange>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>soft_int2_set</name>
+              <description>CPU soft interrupt 2 set. 0: no effect; 1: set effective</description>
+              <bitRange>[2:2]</bitRange>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>soft_int3_set</name>
+              <description>CPU soft interrupt 3 set. 0: no effect; 1: set effective</description>
+              <bitRange>[3:3]</bitRange>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SOFT_INT_CLR</name>
+          <displayName>SOFT_INT_CLR</displayName>
+          <description>CPU soft interrupt clear register (self-clearing)</description>
+          <addressOffset>0x0158</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>soft_int0_clr</name>
+              <description>CPU soft interrupt 0 clear. 0: no effect; 1: clear effective</description>
+              <bitRange>[0:0]</bitRange>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>soft_int1_clr</name>
+              <description>CPU soft interrupt 1 clear. 0: no effect; 1: clear effective</description>
+              <bitRange>[1:1]</bitRange>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>soft_int2_clr</name>
+              <description>CPU soft interrupt 2 clear. 0: no effect; 1: clear effective</description>
+              <bitRange>[2:2]</bitRange>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>soft_int3_clr</name>
+              <description>CPU soft interrupt 3 clear. 0: no effect; 1: clear effective</description>
+              <bitRange>[3:3]</bitRange>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SOFT_INT_STS</name>
+          <displayName>SOFT_INT_STS</displayName>
+          <description>CPU soft interrupt status register</description>
+          <addressOffset>0x015C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>soft_int0_sts</name>
+              <description>CPU soft interrupt 0 status. 0: no interrupt; 1: interrupt active</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>soft_int1_sts</name>
+              <description>CPU soft interrupt 1 status. 0: no interrupt; 1: interrupt active</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>soft_int2_sts</name>
+              <description>CPU soft interrupt 2 status. 0: no interrupt; 1: interrupt active</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>soft_int3_sts</name>
+              <description>CPU soft interrupt 3 status. 0: no interrupt; 1: interrupt active</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- IO_CONFIG: IO Multiplexing and Pad Control (Base: 0x4400D000)-->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>IO_CONFIG</name>
+      <description>IO multiplexing and pad control</description>
+      <baseAddress>0x4400D000</baseAddress>
+      <size>32</size>
+      <access>read-write</access>
+      <registers>
+        <!-- Pin mux select registers -->
+        <register>
+          <name>GPIO_00_SEL</name>
+          <description>GPIO_00 pin mux select</description>
+          <addressOffset>0x0</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_00_sel</name><description>GPIO_00 pin mux: 0:GPIO_00; 1:PWM0; 2:DIAG[0]; 3:SPI1_CSN; 4:JTAG_TDI</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_01_SEL</name>
+          <description>GPIO_01 pin mux select</description>
+          <addressOffset>0x4</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_01_sel</name><description>GPIO_01 pin mux: 0:GPIO_01; 1:PWM1; 2:DIAG[1]; 3:SPI1_IO0; 4:JTAG_MODE; 5:BT_SAMPLE</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_02_SEL</name>
+          <description>GPIO_02 pin mux select</description>
+          <addressOffset>0x8</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_02_sel</name><description>GPIO_02 pin mux: 0:GPIO_02; 1:PWM2; 2:DIAG[2]; 3:SPI1_IO3; 4:WIFI_TSF_SYNC; 5:WL_GLP_SYNC_PULSE; 6:BSLE_GLP_SYNC_PULSE</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_03_SEL</name>
+          <description>GPIO_03 pin mux select</description>
+          <addressOffset>0xC</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_03_sel</name><description>GPIO_03 pin mux: 0:GPIO_03; 1:PWM3; 2:PMU_32K_TEST; 3:SPI1_IO1; 4:HW_ID[0]; 5:DIAG[3]</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_04_SEL</name>
+          <description>GPIO_04 pin mux select</description>
+          <addressOffset>0x10</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_04_sel</name><description>GPIO_04 pin mux: 0:SSI_CLK; 1:PWM4; 2:GPIO_04; 3:SPI1_IO1; 4:JTAG_ENABLE; 5:DFT_JTAG_TMS</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_05_SEL</name>
+          <description>GPIO_05 pin mux select</description>
+          <addressOffset>0x14</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_05_sel</name><description>GPIO_05 pin mux: 0:SSI_DATA; 1:PWM5; 2:UART2_CTS; 3:SPI1_IO2; 4:GPIO_05; 5:SPI0_IN; 6:DFT_JTAG_TCK</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_06_SEL</name>
+          <description>GPIO_06 pin mux select</description>
+          <addressOffset>0x18</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_06_sel</name><description>GPIO_06 pin mux: 0:GPIO_06; 1:PWM6; 2:UART2_RTS; 3:SPI1_SCK; 4:REFCLK_FREQ_STATUS; 5:DIAG[4]; 6:SPI0_OUT; 7:DFT_JTAG_TDI</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_07_SEL</name>
+          <description>GPIO_07 pin mux select</description>
+          <addressOffset>0x1C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_07_sel</name><description>GPIO_07 pin mux: 0:GPIO_07; 1:PWM7; 2:UART2_RXD; 3:SPI0_SCK; 4:I2S_MCLK; 5:DIAG[5]</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_08_SEL</name>
+          <description>GPIO_08 pin mux select</description>
+          <addressOffset>0x20</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_08_sel</name><description>GPIO_08 pin mux: 0:GPIO_08; 1:PWM0; 2:UART2_TXD; 3:SPI0_CS1_N; 4:DIAG[6]</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_09_SEL</name>
+          <description>GPIO_09 pin mux select</description>
+          <addressOffset>0x24</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_09_sel</name><description>GPIO_09 pin mux: 0:GPIO_09; 1:PWM1; 2:RADAR_ANT0_SW; 3:SPI0_OUT; 4:I2S_DO; 5:HW_ID[1]; 6:DIAG[7]; 7:JTAG_TDO</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_10_SEL</name>
+          <description>GPIO_10 pin mux select</description>
+          <addressOffset>0x28</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_10_sel</name><description>GPIO_10 pin mux: 0:GPIO_10; 1:PWM2; 2:ANT0_SW; 3:SPI0_CS0_N; 4:I2S_SCLK; 5:DIAG[0]</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_11_SEL</name>
+          <description>GPIO_11 pin mux select</description>
+          <addressOffset>0x2C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_11_sel</name><description>GPIO_11 pin mux: 0:GPIO_11; 1:PWM3; 2:RADAR_ANT1_SW; 3:SPI0_IN; 4:I2S_LRCLK; 5:DIAG[1]; 6:HW_ID[2]</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_12_SEL</name>
+          <description>GPIO_12 pin mux select</description>
+          <addressOffset>0x30</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_12_sel</name><description>GPIO_12 pin mux: 0:GPIO_12; 1:PWM4; 2:ANT1_SW; 4:I2S_DI; 6:HW_ID[3]</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_13_SEL</name>
+          <description>GPIO_13 pin mux select</description>
+          <addressOffset>0x34</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_13_sel</name><description>GPIO_13 pin mux: 0:GPIO_13; 1:UART1_CTS; 2:RADAR_ANT0_SW; 3:DFT_JTAG_TDO; 4:JTAG_TMS</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>GPIO_14_SEL</name>
+          <description>GPIO_14 pin mux select</description>
+          <addressOffset>0x38</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>gpio_14_sel</name><description>GPIO_14 pin mux: 0:GPIO_14; 1:UART1_RTS; 2:RADAR_ANT1_SW; 3:DFT_JTAG_TRSTN; 4:JTAG_TCK</description><bitRange>[2:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>UART1_TXD_SEL</name>
+          <description>UART1_TXD pin mux select</description>
+          <addressOffset>0x3C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>uart1_txd_sel</name><description>UART1_TXD pin mux: 0:GPIO_15; 1:UART1_TXD; 2:I2C1_SDA</description><bitRange>[1:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>UART1_RXD_SEL</name>
+          <description>UART1_RXD pin mux select</description>
+          <addressOffset>0x40</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>uart1_rxd_sel</name><description>UART1_RXD pin mux: 0:GPIO_16; 1:UART1_RXD; 2:I2C1_SCL</description><bitRange>[1:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>UART0_TXD_SEL</name>
+          <description>UART0_TXD pin mux select</description>
+          <addressOffset>0x44</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>uart0_txd_sel</name><description>UART0_TXD pin mux: 0:GPIO_17; 1:UART0_TXD; 2:I2C0_SDA</description><bitRange>[1:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>UART0_RXD_SEL</name>
+          <description>UART0_RXD pin mux select</description>
+          <addressOffset>0x48</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>uart0_rxd_sel</name><description>UART0_RXD pin mux: 0:GPIO_18; 1:UART0_RXD; 2:I2C0_SCL</description><bitRange>[1:0]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+
+        <!-- Pad control registers (base offset 0x800) -->
+        <register>
+          <name>PAD_GPIO_00_CTRL</name>
+          <description>GPIO_00 pad control register</description>
+          <addressOffset>0x800</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_gpio_00_ctrl_st</name><description>Schmitt trigger: 0:No Schmitt; 1:Schmitt Enable</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_00_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_00_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_00_ctrl_ds2</name><description>Drive strength bit 2. DS2~DS0: 111~000, drive strength decreases</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_00_ctrl_pe</name><description>Pull enable. PE/PS: 00:no pull; 01:strong pull-up; 10:pull-down; 11:pull-up</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_00_ctrl_ps</name><description>Pull select. PE/PS: 00:no pull; 01:strong pull-up; 10:pull-down; 11:pull-up</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_00_ctrl_ie</name><description>Input enable: 0:input disabled; 1:input enabled</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_01_CTRL</name>
+          <description>GPIO_01 pad control register</description>
+          <addressOffset>0x804</addressOffset>
+          <resetValue>0x00000A00</resetValue>
+          <fields>
+            <field><name>pad_gpio_01_ctrl_st</name><description>Schmitt trigger: 0:No Schmitt; 1:Schmitt Enable</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_01_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_01_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_01_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_01_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_01_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_01_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_02_CTRL</name>
+          <description>GPIO_02 pad control register</description>
+          <addressOffset>0x808</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_gpio_02_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_02_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_02_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_02_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_02_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_02_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_02_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_03_CTRL</name>
+          <description>GPIO_03 pad control register</description>
+          <addressOffset>0x80C</addressOffset>
+          <resetValue>0x00000A00</resetValue>
+          <fields>
+            <field><name>pad_gpio_03_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_03_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_03_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_03_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_03_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_03_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_03_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_04_CTRL</name>
+          <description>GPIO_04 pad control register</description>
+          <addressOffset>0x810</addressOffset>
+          <resetValue>0x00000A00</resetValue>
+          <fields>
+            <field><name>pad_gpio_04_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_04_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_04_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_04_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_04_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_04_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_04_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_05_CTRL</name>
+          <description>GPIO_05 pad control register</description>
+          <addressOffset>0x814</addressOffset>
+          <resetValue>0x00000820</resetValue>
+          <fields>
+            <field><name>pad_gpio_05_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_05_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_05_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_05_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_05_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_05_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_05_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_06_CTRL</name>
+          <description>GPIO_06 pad control register</description>
+          <addressOffset>0x818</addressOffset>
+          <resetValue>0x00000A00</resetValue>
+          <fields>
+            <field><name>pad_gpio_06_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_06_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_06_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_06_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_06_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_06_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_06_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_07_CTRL</name>
+          <description>GPIO_07 pad control register</description>
+          <addressOffset>0x81C</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_gpio_07_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_07_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_07_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_07_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_07_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_07_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_07_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_08_CTRL</name>
+          <description>GPIO_08 pad control register</description>
+          <addressOffset>0x820</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_gpio_08_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_08_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_08_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_08_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_08_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_08_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_08_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_09_CTRL</name>
+          <description>GPIO_09 pad control register</description>
+          <addressOffset>0x824</addressOffset>
+          <resetValue>0x00000A00</resetValue>
+          <fields>
+            <field><name>pad_gpio_09_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_09_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_09_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_09_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_09_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_09_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_09_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_10_CTRL</name>
+          <description>GPIO_10 pad control register</description>
+          <addressOffset>0x828</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_gpio_10_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_10_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_10_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_10_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_10_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_10_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_10_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_11_CTRL</name>
+          <description>GPIO_11 pad control register</description>
+          <addressOffset>0x82C</addressOffset>
+          <resetValue>0x00000A00</resetValue>
+          <fields>
+            <field><name>pad_gpio_11_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_11_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_11_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_11_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_11_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_11_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_11_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_12_CTRL</name>
+          <description>GPIO_12 pad control register</description>
+          <addressOffset>0x830</addressOffset>
+          <resetValue>0x00000A00</resetValue>
+          <fields>
+            <field><name>pad_gpio_12_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_12_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_12_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_12_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_12_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_12_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_12_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_13_CTRL</name>
+          <description>GPIO_13 pad control register</description>
+          <addressOffset>0x834</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_gpio_13_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_13_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_13_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_13_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_13_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_13_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_13_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_GPIO_14_CTRL</name>
+          <description>GPIO_14 pad control register</description>
+          <addressOffset>0x838</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_gpio_14_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_14_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_14_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_14_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_14_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_14_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_gpio_14_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_UART1_TXD_CTRL</name>
+          <description>UART1_TXD pad control register</description>
+          <addressOffset>0x83C</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_uart1_txd_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_uart1_txd_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_UART1_RXD_CTRL</name>
+          <description>UART1_RXD pad control register</description>
+          <addressOffset>0x840</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_uart1_rxd_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_uart1_rxd_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_UART0_TXD_CTRL</name>
+          <description>UART0_TXD pad control register</description>
+          <addressOffset>0x844</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_uart0_txd_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_uart0_txd_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_UART0_RXD_CTRL</name>
+          <description>UART0_RXD pad control register</description>
+          <addressOffset>0x848</addressOffset>
+          <resetValue>0x00000800</resetValue>
+          <fields>
+            <field><name>pad_uart0_rxd_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_uart0_rxd_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_SFC_CLK_CTRL</name>
+          <description>SFC_CLK pad control register</description>
+          <addressOffset>0x868</addressOffset>
+          <resetValue>0x00000810</resetValue>
+          <fields>
+            <field><name>pad_sfc_clk_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_clk_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_clk_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_clk_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_clk_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_clk_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_clk_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_SFC_CSN_CTRL</name>
+          <description>SFC_CSN pad control register</description>
+          <addressOffset>0x86C</addressOffset>
+          <resetValue>0x00000E10</resetValue>
+          <fields>
+            <field><name>pad_sfc_csn_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_csn_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_csn_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_csn_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_csn_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_csn_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_csn_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_SFC_IO0_CTRL</name>
+          <description>SFC_IO0 pad control register</description>
+          <addressOffset>0x870</addressOffset>
+          <resetValue>0x00000E10</resetValue>
+          <fields>
+            <field><name>pad_sfc_io0_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io0_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io0_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io0_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io0_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io0_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io0_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_SFC_IO1_CTRL</name>
+          <description>SFC_IO1 pad control register</description>
+          <addressOffset>0x874</addressOffset>
+          <resetValue>0x00000E10</resetValue>
+          <fields>
+            <field><name>pad_sfc_io1_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io1_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io1_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io1_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io1_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io1_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io1_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_SFC_IO2_CTRL</name>
+          <description>SFC_IO2 pad control register</description>
+          <addressOffset>0x878</addressOffset>
+          <resetValue>0x00000E10</resetValue>
+          <fields>
+            <field><name>pad_sfc_io2_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io2_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io2_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io2_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io2_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io2_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io2_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>PAD_SFC_IO3_CTRL</name>
+          <description>SFC_IO3 pad control register</description>
+          <addressOffset>0x87C</addressOffset>
+          <resetValue>0x00000E10</resetValue>
+          <fields>
+            <field><name>pad_sfc_io3_ctrl_st</name><description>Schmitt trigger</description><bitRange>[3:3]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io3_ctrl_ds0</name><description>Drive strength bit 0</description><bitRange>[4:4]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io3_ctrl_ds1</name><description>Drive strength bit 1</description><bitRange>[5:5]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io3_ctrl_ds2</name><description>Drive strength bit 2</description><bitRange>[6:6]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io3_ctrl_pe</name><description>Pull enable</description><bitRange>[9:9]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io3_ctrl_ps</name><description>Pull select</description><bitRange>[10:10]</bitRange><access>read-write</access></field>
+            <field><name>pad_sfc_io3_ctrl_ie</name><description>Input enable</description><bitRange>[11:11]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- GPIO0 (Base: 0x44028000)                                     -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>GPIO0</name>
+      <description>GPIO controller for GPIO[7:0]</description>
+      <baseAddress>0x44028000</baseAddress>
+      <interrupt><name>GPIO_INT0</name><value>33</value></interrupt>
+      <registers>
+        <register><name>GPIO_SW_OUT</name><description>GPIO data register</description><addressOffset>0x0000</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_sw_out</name><description>GPIO data. Output: written value drives I/O; Input: reads external port</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>GPIO_SW_OEN</name><description>GPIO data direction register</description><addressOffset>0x0004</addressOffset><resetValue>0x000000FF</resetValue><fields><field><name>gpio_sw_oen</name><description>GPIO direction: 0=output; 1=input (default)</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>GPIO_INT_EN</name><description>GPIO interrupt enable register</description><addressOffset>0x000C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_int_en</name><description>Interrupt enable: 0=normal GPIO; 1=interrupt port</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>GPIO_INT_MASK</name><description>GPIO interrupt mask register</description><addressOffset>0x0010</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_int_mask</name><description>Interrupt mask: 0=not masked; 1=masked</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>GPIO_INT_TYPE</name><description>GPIO interrupt type register</description><addressOffset>0x0014</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_int_type</name><description>Interrupt type: 0=level; 1=edge</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>GPIO_INT_POLARITY</name><description>GPIO interrupt polarity register</description><addressOffset>0x0018</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_int_polarity</name><description>Interrupt polarity: 0=low/falling; 1=high/rising</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>GPIO_INT_DEDGE</name><description>GPIO dual-edge interrupt enable register</description><addressOffset>0x001C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_int_dedge</name><description>Dual-edge interrupt enable: 0=disabled; 1=enabled</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>GPIO_INT_DEBOUNCE</name><description>GPIO interrupt debounce control register</description><addressOffset>0x0020</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_int_debounce</name><description>Debounce enable: 0=disabled; 1=enabled</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>GPIO_INT_RAW</name><description>GPIO raw interrupt status register</description><addressOffset>0x0024</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_int_raw</name><description>Raw interrupt status (before mask): 0=no interrupt; 1=interrupt</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>GPIO_INTR</name><description>GPIO interrupt status register</description><addressOffset>0x0028</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_intr</name><description>Interrupt status (after mask): 0=no interrupt; 1=interrupt</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>GPIO_INT_EOI</name><description>GPIO interrupt clear register</description><addressOffset>0x002C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_int_eoi</name><description>Edge interrupt clear: 0=no clear; 1=clear interrupt</description><bitRange>[7:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>GPIO_DATA_SET</name><description>GPIO data set register</description><addressOffset>0x0030</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_data_set</name><description>Write 1 to set corresponding GPIO_SW_OUT bits</description><bitRange>[7:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>GPIO_DATA_CLR</name><description>GPIO data clear register</description><addressOffset>0x0034</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gpio_data_clr</name><description>Write 1 to clear corresponding GPIO_SW_OUT bits</description><bitRange>[7:0]</bitRange><access>write-only</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- GPIO1 derived from GPIO0 -->
+    <peripheral derivedFrom="GPIO0">
+      <name>GPIO1</name>
+      <description>GPIO controller for GPIO[15:8]</description>
+      <baseAddress>0x44029000</baseAddress>
+      <interrupt><name>GPIO_INT1</name><value>34</value></interrupt>
+    </peripheral>
+
+    <!-- GPIO2 derived from GPIO0 -->
+    <peripheral derivedFrom="GPIO0">
+      <name>GPIO2</name>
+      <description>GPIO controller for GPIO[18:16] (BIT[7:3] unused)</description>
+      <baseAddress>0x4402A000</baseAddress>
+      <interrupt><name>GPIO_INT2</name><value>35</value></interrupt>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- UART0 (Base: 0x44010000) - Template                         -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>UART0</name>
+      <description>UART0 - Universal Asynchronous Receiver/Transmitter</description>
+      <baseAddress>0x44010000</baseAddress>
+      <interrupt><name>UART0_INT</name><value>53</value></interrupt>
+      <registers>
+        <register><name>INTR_ID</name><description>Interrupt ID register</description><addressOffset>0x00</addressOffset><size>16</size><resetValue>0x0001</resetValue><fields><field><name>intr_id</name><description>Interrupt ID: 0x0=modem status; 0x1=no interrupt; 0x2=THR empty; 0x4=rx data; 0x6=rx line status; 0x7=busy; 0xC=char timeout</description><bitRange>[3:0]</bitRange><access>read-only</access></field><field><name>fifo_en_s</name><description>FIFO enable status: 0=FIFO disabled; 1=FIFO enabled</description><bitRange>[4:4]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>DATA</name><description>Data register</description><addressOffset>0x04</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>data</name><description>Write: TX data; Read: RX data</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>UART_CTL</name><description>UART control register</description><addressOffset>0x08</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>div_en</name><description>Divider enable: 0=div accessible when not busy; 1=div accessible anytime</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>xbreak</name><description>Break control: 0=normal; 1=force TX to space</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>dlen</name><description>Data length: 00=5bit; 01=6bit; 10=7bit; 11=8bit</description><bitRange>[3:2]</bitRange><access>read-write</access></field><field><name>eps</name><description>Parity select: 0=odd; 1=even</description><bitRange>[4:4]</bitRange><access>read-write</access></field><field><name>pen</name><description>Parity enable: 0=disabled; 1=enabled</description><bitRange>[5:5]</bitRange><access>read-write</access></field><field><name>sps</name><description>Sticky parity: 0=disabled; 1=enabled</description><bitRange>[6:6]</bitRange><access>read-write</access></field><field><name>stp</name><description>Stop bits: 0=1bit; 1=1.5/2bit</description><bitRange>[7:7]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DIV_H</name><description>Baud rate divider high byte</description><addressOffset>0x0C</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>div_h</name><description>Divider integer high 8 bits</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DIV_L</name><description>Baud rate divider low byte</description><addressOffset>0x10</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>div_l</name><description>Divider integer low 8 bits</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DIV_FRA</name><description>Baud rate divider fractional part</description><addressOffset>0x14</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>div_fra</name><description>Divider fractional part (divided by 2^6)</description><bitRange>[5:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>INTR_EN</name><description>Interrupt enable register</description><addressOffset>0x18</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>rece_line_stat_intr_en</name><description>RX line status interrupt enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>modem_intr_en</name><description>Modem status interrupt enable</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>rece_data_intr_en</name><description>RX data available interrupt enable</description><bitRange>[2:2]</bitRange><access>read-write</access></field><field><name>tran_em_intr_en</name><description>TX empty interrupt enable</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>ptim_en</name><description>Programmable THRE interrupt mode enable</description><bitRange>[4:4]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>INTR_STATUS</name><description>Interrupt status register</description><addressOffset>0x1C</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>busy_det_intr</name><description>Busy detect interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>modem_intr_status</name><description>Modem interrupt status</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>thre_intr_status</name><description>THR empty interrupt status</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>char_to_intr_status</name><description>Character timeout interrupt status</description><bitRange>[3:3]</bitRange><access>read-only</access></field><field><name>data_avail_intr_status</name><description>RX data available interrupt status</description><bitRange>[4:4]</bitRange><access>read-only</access></field><field><name>line_intr_status</name><description>RX line interrupt status</description><bitRange>[5:5]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>FIFO_CTL</name><description>FIFO control register</description><addressOffset>0x24</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>tx_empty_trig</name><description>TX empty trigger: 00=empty; 01=2chars; 10=1/4; 11=1/2</description><bitRange>[1:0]</bitRange><access>write-only</access></field><field><name>rx_empty_trig</name><description>RX trigger: 00=1char; 01=1/4; 10=1/2; 11=2below full</description><bitRange>[3:2]</bitRange><access>write-only</access></field><field><name>fifo_en</name><description>FIFO enable</description><bitRange>[4:4]</bitRange><access>write-only</access></field><field><name>tx_fifo_rst</name><description>TX FIFO reset: 0=no reset; 1=reset</description><bitRange>[5:5]</bitRange><access>write-only</access></field><field><name>rx_fifo_rst</name><description>RX FIFO reset: 0=no reset; 1=reset</description><bitRange>[6:6]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>FAR</name><description>FIFO access mode enable register</description><addressOffset>0x28</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>far</name><description>FIFO access mode: 0=disabled; 1=enabled</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>MODEM_CTL</name><description>Modem control register</description><addressOffset>0x2C</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>afc_en</name><description>Auto flow control enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>lb_mode</name><description>Loopback mode: 0=disabled; 1=enabled</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>rts</name><description>RTS software control</description><bitRange>[2:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>MODEM_STATUS</name><description>Modem status register</description><addressOffset>0x30</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>dcts</name><description>CTS change indicator</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>cts</name><description>CTS signal state</description><bitRange>[1:1]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>LINE_STATUS</name><description>Line status register</description><addressOffset>0x34</addressOffset><size>16</size><resetValue>0x00C0</resetValue><fields><field><name>rx_fifo_err</name><description>RX FIFO error status</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>frame_err</name><description>Framing error</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>parity_err</name><description>Parity error</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>overrun_err</name><description>Overrun error</description><bitRange>[3:3]</bitRange><access>read-only</access></field><field><name>break_intr</name><description>Break interrupt</description><bitRange>[4:4]</bitRange><access>read-only</access></field><field><name>data_available</name><description>Data available in RX FIFO/RBR</description><bitRange>[5:5]</bitRange><access>read-only</access></field><field><name>thre_s</name><description>THR empty flag</description><bitRange>[6:6]</bitRange><access>read-only</access></field><field><name>tx_empty_s</name><description>Transmitter empty flag</description><bitRange>[7:7]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>UART_GP_REG</name><description>UART general purpose register</description><addressOffset>0x38</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>uart_gp_reg</name><description>General purpose storage</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TX_FIFO_READ</name><description>TX FIFO read register</description><addressOffset>0x3C</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>tx_fifo_read</name><description>TX FIFO top data</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>RX_FIFO_WRITE</name><description>RX FIFO write register</description><addressOffset>0x40</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>rx_fifo_write</name><description>Write: push data to RX FIFO; Read: rx_fifo_level[6:0]</description><bitRange>[7:0]</bitRange><access>read-write</access></field><field><name>rx_fifo_pe</name><description>RX FIFO parity error</description><bitRange>[8:8]</bitRange><access>write-only</access></field><field><name>rx_fifo_fe</name><description>RX FIFO framing error</description><bitRange>[9:9]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>FIFO_STATUS</name><description>FIFO status register</description><addressOffset>0x44</addressOffset><size>16</size><resetValue>0x0002</resetValue><fields><field><name>tx_fifo_full</name><description>TX FIFO full flag</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>tx_fifo_empty</name><description>TX FIFO empty flag</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>rx_fifo_full</name><description>RX FIFO full flag</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>rx_fifo_empty</name><description>RX FIFO empty flag</description><bitRange>[3:3]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TX_FIFO_CNT</name><description>TX FIFO data counter</description><addressOffset>0x48</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>tx_fifo_level</name><description>TX FIFO data count</description><bitRange>[6:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>RX_FIFO_CNT</name><description>RX FIFO data counter</description><addressOffset>0x4C</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>reserved</name><description>Reserved</description><bitRange>[6:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>HALT_TX</name><description>TX halt register</description><addressOffset>0x50</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>halt_tx</name><description>TX halt: 0=disabled; 1=enabled</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMA_SW_ACK</name><description>DMA software acknowledge register</description><addressOffset>0x54</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>dma_sw_ack</name><description>DMA software acknowledge (write-clear)</description><bitRange>[0:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>BAUD_CTL</name><description>Baud rate control register</description><addressOffset>0x58</addressOffset><size>16</size><resetValue>0x007F</resetValue><fields><field><name>baud_div</name><description>Baud rate oversampling: 0x7=8x; 0xF=16x</description><bitRange>[3:0]</bitRange><access>read-write</access></field><field><name>sample_phase</name><description>RX sample phase</description><bitRange>[7:4]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>STP_CTL</name><description>Stop bit control register</description><addressOffset>0x5C</addressOffset><size>16</size><resetValue>0x0000</resetValue><fields><field><name>rx_sp</name><description>RX stop bits when stp_mode=1</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>tx_sp</name><description>TX stop bits when stp_mode=1</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>stp_mode</name><description>Stop bit control mode: 0=UART_CTL stp; 1=STP_CTL</description><bitRange>[2:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>UART_PARAMETER</name><description>UART parameter register</description><addressOffset>0x60</addressOffset><size>16</size><resetValue>0x0D04</resetValue><fields><field><name>fifo_depth</name><description>FIFO depth: 0x4=64</description><bitRange>[7:0]</bitRange><access>read-only</access></field><field><name>apb_data_width</name><description>APB data width: 0x1=16bit</description><bitRange>[9:8]</bitRange><access>read-only</access></field><field><name>afce_mode</name><description>AFCE mode: 0=disabled; 1=enabled</description><bitRange>[10:10]</bitRange><access>read-only</access></field><field><name>dma_mode</name><description>DMA mode: 0=DMA_EXTRA disabled; 1=enabled</description><bitRange>[11:11]</bitRange><access>read-only</access></field><field><name>shadow</name><description>Shadow feature enable</description><bitRange>[12:12]</bitRange><access>read-only</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- UART1 derived from UART0 -->
+    <peripheral derivedFrom="UART0">
+      <name>UART1</name>
+      <description>UART1 with flow control support</description>
+      <baseAddress>0x44011000</baseAddress>
+      <interrupt><name>UART1_INT</name><value>54</value></interrupt>
+    </peripheral>
+
+    <!-- UART2 derived from UART0 -->
+    <peripheral derivedFrom="UART0">
+      <name>UART2</name>
+      <description>UART2 with flow control support</description>
+      <baseAddress>0x44012000</baseAddress>
+      <interrupt><name>UART2_INT</name><value>55</value></interrupt>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- I2C0 (Base: 0x44018000)                                      -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>I2C0</name>
+      <description>I2C0 master controller</description>
+      <baseAddress>0x44018000</baseAddress>
+      <interrupt><name>I2C0_INT</name><value>31</value></interrupt>
+      <registers>
+        <register><name>I2C_CTRL</name><description>I2C control register</description><addressOffset>0x00</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>int_done_mask</name><description>Transfer complete interrupt mask: 0=masked; 1=unmasked</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>int_arb_loss_mask</name><description>Arbitration loss interrupt mask</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>int_ack_err_mask</name><description>ACK error interrupt mask</description><bitRange>[2:2]</bitRange><access>read-write</access></field><field><name>int_rx_mask</name><description>RX interrupt mask</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>int_tx_mask</name><description>TX interrupt mask</description><bitRange>[4:4]</bitRange><access>read-write</access></field><field><name>int_stop_mask</name><description>Stop condition interrupt mask</description><bitRange>[5:5]</bitRange><access>read-write</access></field><field><name>int_start_mask</name><description>Start condition interrupt mask</description><bitRange>[6:6]</bitRange><access>read-write</access></field><field><name>int_mask</name><description>I2C interrupt master mask</description><bitRange>[7:7]</bitRange><access>read-write</access></field><field><name>i2c_en</name><description>I2C enable: 0=disabled; 1=enabled</description><bitRange>[8:8]</bitRange><access>read-write</access></field><field><name>int_rxtide_mask</name><description>RX FIFO overflow interrupt mask</description><bitRange>[9:9]</bitRange><access>read-write</access></field><field><name>int_txtide_mask</name><description>TX FIFO overflow interrupt mask</description><bitRange>[10:10]</bitRange><access>read-write</access></field><field><name>mode_ctrl</name><description>I2C mode: 0=no FIFO; 1=FIFO mode</description><bitRange>[11:11]</bitRange><access>read-write</access></field><field><name>int_txfifo_over_mask</name><description>TX FIFO complete interrupt mask</description><bitRange>[12:12]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_COM</name><description>I2C command register</description><addressOffset>0x04</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>op_stop</name><description>Generate stop condition: 0=end; 1=active</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>op_we</name><description>Generate write operation</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>op_rd</name><description>Generate read operation</description><bitRange>[2:2]</bitRange><access>read-write</access></field><field><name>op_start</name><description>Generate start condition</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>op_ack</name><description>Master RX ACK: 0=send ACK; 1=no ACK</description><bitRange>[4:4]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_ICR</name><description>I2C interrupt clear register</description><addressOffset>0x08</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>clr_int_done</name><description>Clear transfer complete interrupt</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>clr_int_arb_loss</name><description>Clear arbitration loss interrupt</description><bitRange>[1:1]</bitRange><access>write-only</access></field><field><name>clr_int_ack_err</name><description>Clear ACK error interrupt</description><bitRange>[2:2]</bitRange><access>write-only</access></field><field><name>clr_int_rx</name><description>Clear RX interrupt</description><bitRange>[3:3]</bitRange><access>write-only</access></field><field><name>clr_int_tx</name><description>Clear TX interrupt</description><bitRange>[4:4]</bitRange><access>write-only</access></field><field><name>clr_int_stop</name><description>Clear stop interrupt</description><bitRange>[5:5]</bitRange><access>write-only</access></field><field><name>clr_int_start</name><description>Clear start interrupt</description><bitRange>[6:6]</bitRange><access>write-only</access></field><field><name>clr_int_rxtide</name><description>Clear RX FIFO overflow interrupt</description><bitRange>[7:7]</bitRange><access>write-only</access></field><field><name>clr_int_txtide</name><description>Clear TX FIFO overflow interrupt</description><bitRange>[8:8]</bitRange><access>write-only</access></field><field><name>clr_int_txfifo_over</name><description>Clear TX FIFO complete interrupt</description><bitRange>[9:9]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>I2C_SR</name><description>I2C status register</description><addressOffset>0x0C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>int_done</name><description>Transfer complete interrupt flag</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>int_arb_loss</name><description>Arbitration loss interrupt flag</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>int_ack_err</name><description>ACK error interrupt flag</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>int_rx</name><description>RX interrupt flag</description><bitRange>[3:3]</bitRange><access>read-only</access></field><field><name>int_tx</name><description>TX interrupt flag</description><bitRange>[4:4]</bitRange><access>read-only</access></field><field><name>int_stop</name><description>Stop interrupt flag</description><bitRange>[5:5]</bitRange><access>read-only</access></field><field><name>int_start</name><description>Start interrupt flag</description><bitRange>[6:6]</bitRange><access>read-only</access></field><field><name>bus_busy</name><description>Bus busy: 0=idle; 1=busy</description><bitRange>[7:7]</bitRange><access>read-only</access></field><field><name>int_rxtide</name><description>RX FIFO overflow flag</description><bitRange>[8:8]</bitRange><access>read-only</access></field><field><name>int_txtide</name><description>TX FIFO overflow flag</description><bitRange>[9:9]</bitRange><access>read-only</access></field><field><name>int_txfifo_over</name><description>TX FIFO complete flag</description><bitRange>[10:10]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>I2C_SCL_H</name><description>SCL high period register</description><addressOffset>0x10</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>scl_h</name><description>SCL high period (value*2 = actual period)</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_SCL_L</name><description>SCL low period register</description><addressOffset>0x14</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>scl_l</name><description>SCL low period (value*2 = actual period)</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_TXR</name><description>I2C TX data register</description><addressOffset>0x18</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>i2c_txr</name><description>TX data byte</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_RXR</name><description>I2C RX data register</description><addressOffset>0x1C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>i2c_rxr</name><description>RX data byte</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>I2C_FIFOSTATUS</name><description>FIFO status register</description><addressOffset>0x20</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>txff</name><description>TX FIFO full: 0=not full; 1=full</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>txfe</name><description>TX FIFO empty: 0=not empty; 1=empty</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>rxff</name><description>RX FIFO full</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>rxfe</name><description>RX FIFO empty</description><bitRange>[3:3]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>I2C_TXCOUNT</name><description>TX FIFO count register</description><addressOffset>0x24</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>txcount</name><description>TX FIFO character count (write any value to clear TX FIFO)</description><bitRange>[5:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_RXCOUNT</name><description>RX FIFO count register</description><addressOffset>0x28</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>rxcount</name><description>RX FIFO character count (write any value to clear RX FIFO)</description><bitRange>[5:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_RXTIDE</name><description>RX FIFO threshold register</description><addressOffset>0x2C</addressOffset><resetValue>0x00000001</resetValue><fields><field><name>rxtide</name><description>RX FIFO overflow interrupt trigger value</description><bitRange>[5:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_TXTIDE</name><description>TX FIFO threshold register</description><addressOffset>0x30</addressOffset><resetValue>0x00000001</resetValue><fields><field><name>txtide</name><description>TX FIFO overflow interrupt trigger value</description><bitRange>[5:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2C_FTRPER</name><description>Glitch filter configuration register</description><addressOffset>0x34</addressOffset><resetValue>0x0000000F</resetValue><fields><field><name>ftrper</name><description>Glitch filter period in ic_clk cycles</description><bitRange>[3:0]</bitRange><access>read-write</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- I2C1 derived from I2C0 -->
+    <peripheral derivedFrom="I2C0">
+      <name>I2C1</name>
+      <description>I2C1 master controller</description>
+      <baseAddress>0x44018100</baseAddress>
+      <interrupt><name>I2C1_INT</name><value>32</value></interrupt>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- PWM (Base: 0x44024000)                                       -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>PWM</name>
+      <description>PWM controller with 8 channels</description>
+      <baseAddress>0x44024000</baseAddress>
+      <interrupt><name>PWM_ABNOR_INT</name><value>56</value></interrupt>
+      <registers>
+        <!-- Group registers (i=0..3) -->
+        <register><name>PWM_SEL0</name><description>PWM group 0 select</description><addressOffset>0x000</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_sel_0</name><description>Group 0 PWM select, each bit corresponds to one PWM channel</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_STARTCLRCNT_EN0</name><description>PWM group 0 start clear counter enable</description><addressOffset>0x004</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_startclrcnt_en_0</name><description>Start clear counter enable for group 0</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_START0</name><description>PWM group 0 start</description><addressOffset>0x008</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_start_0</name><description>Start group 0 (self-clearing)</description><bitRange>[0:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>PWM_SEL1</name><description>PWM group 1 select</description><addressOffset>0x010</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_sel_1</name><description>Group 1 PWM select</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_STARTCLRCNT_EN1</name><description>PWM group 1 start clear counter enable</description><addressOffset>0x014</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_startclrcnt_en_1</name><description>Start clear counter enable for group 1</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_START1</name><description>PWM group 1 start</description><addressOffset>0x018</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_start_1</name><description>Start group 1 (self-clearing)</description><bitRange>[0:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>PWM_SEL2</name><description>PWM group 2 select</description><addressOffset>0x020</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_sel_2</name><description>Group 2 PWM select</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_STARTCLRCNT_EN2</name><description>PWM group 2 start clear counter enable</description><addressOffset>0x024</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_startclrcnt_en_2</name><description>Start clear counter enable for group 2</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_START2</name><description>PWM group 2 start</description><addressOffset>0x028</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_start_2</name><description>Start group 2 (self-clearing)</description><bitRange>[0:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>PWM_SEL3</name><description>PWM group 3 select</description><addressOffset>0x030</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_sel_3</name><description>Group 3 PWM select</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_STARTCLRCNT_EN3</name><description>PWM group 3 start clear counter enable</description><addressOffset>0x034</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_startclrcnt_en_3</name><description>Start clear counter enable for group 3</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_START3</name><description>PWM group 3 start</description><addressOffset>0x038</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_start_3</name><description>Start group 3 (self-clearing)</description><bitRange>[0:0]</bitRange><access>write-only</access></field></fields></register>
+
+        <!-- Per-channel registers (j=0..7, stride 0x40) -->
+        <register><name>PWM_EN0</name><description>PWM0 enable</description><addressOffset>0x0100</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_en_0</name><description>PWM0 enable: 0=off; 1=on</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_PORTITY0</name><description>PWM0 polarity</description><addressOffset>0x0104</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_poarity_0</name><description>PWM0 polarity: 0=normal; 1=inverted</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_OEN_CFG0</name><description>PWM0 high-impedance config</description><addressOffset>0x0108</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_oen_cfg_0</name><description>PWM0 high-Z enable: 0=follow polarity; 1=high-Z when inactive</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_OFFSET_L0</name><description>PWM0 phase offset low 16 bits</description><addressOffset>0x010C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_offset_l_0</name><description>PWM0 phase offset low 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_OFFSET_H0</name><description>PWM0 phase offset high 16 bits</description><addressOffset>0x0110</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_offset_h_0</name><description>PWM0 phase offset high 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_FREQ_L0</name><description>PWM0 frequency low 16 bits</description><addressOffset>0x0114</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_freq_l_0</name><description>PWM0 clock divider low 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_FREQ_H0</name><description>PWM0 frequency high 16 bits</description><addressOffset>0x0118</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_freq_h_0</name><description>PWM0 clock divider high 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_DUTY_L0</name><description>PWM0 duty cycle low 16 bits</description><addressOffset>0x011C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_duty_l_0</name><description>PWM0 duty cycle low 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_DUTY_H0</name><description>PWM0 duty cycle high 16 bits</description><addressOffset>0x0120</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_duty_h_0</name><description>PWM0 duty cycle high 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_PERIODLOAD_FLAG0</name><description>PWM0 period load flag</description><addressOffset>0x0124</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_periodload_flag_0</name><description>Period load complete flag</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>PWM_PERIOD_VAL0</name><description>PWM0 pulse count value</description><addressOffset>0x0128</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_period_val_0</name><description>Pulse count for stepping mode</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_PERIODCNT0</name><description>PWM0 pulse count current value</description><addressOffset>0x012C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_periodcnt_0</name><description>Current pulse count</description><bitRange>[15:0]</bitRange><access>read-only</access></field></fields></register>
+
+        <!-- PWM1 (offset 0x140) -->
+        <register><name>PWM_EN1</name><description>PWM1 enable</description><addressOffset>0x0140</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_en_1</name><description>PWM1 enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_PORTITY1</name><description>PWM1 polarity</description><addressOffset>0x0144</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_poarity_1</name><description>PWM1 polarity</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_OEN_CFG1</name><description>PWM1 high-impedance config</description><addressOffset>0x0148</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_oen_cfg_1</name><description>PWM1 high-Z enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_OFFSET_L1</name><description>PWM1 phase offset low</description><addressOffset>0x014C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_offset_l_1</name><description>PWM1 phase offset low 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_OFFSET_H1</name><description>PWM1 phase offset high</description><addressOffset>0x0150</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_offset_h_1</name><description>PWM1 phase offset high 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_FREQ_L1</name><description>PWM1 frequency low</description><addressOffset>0x0154</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_freq_l_1</name><description>PWM1 clock divider low 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_FREQ_H1</name><description>PWM1 frequency high</description><addressOffset>0x0158</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_freq_h_1</name><description>PWM1 clock divider high 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_DUTY_L1</name><description>PWM1 duty cycle low</description><addressOffset>0x015C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_duty_l_1</name><description>PWM1 duty low 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_DUTY_H1</name><description>PWM1 duty cycle high</description><addressOffset>0x0160</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_duty_h_1</name><description>PWM1 duty high 16 bits</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_PERIODLOAD_FLAG1</name><description>PWM1 period load flag</description><addressOffset>0x0164</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_periodload_flag_1</name><description>Period load flag</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>PWM_PERIOD_VAL1</name><description>PWM1 pulse count</description><addressOffset>0x0168</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_period_val_1</name><description>Pulse count</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_PERIODCNT1</name><description>PWM1 pulse count current</description><addressOffset>0x016C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_periodcnt_1</name><description>Current pulse count</description><bitRange>[15:0]</bitRange><access>read-only</access></field></fields></register>
+
+        <!-- Global PWM registers -->
+        <register><name>PWM_ABNOR_STATE0</name><description>PWM abnormal state register 0</description><addressOffset>0x500</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_abnor_state0</name><description>Multi-channel config abnormal state, each bit per PWM</description><bitRange>[15:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>PWM_ABNOR_STATE1</name><description>PWM abnormal state register 1</description><addressOffset>0x504</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_abnor_state1</name><description>Counter config abnormal state, each bit per PWM</description><bitRange>[15:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>PWM_ABNOR_STATE_CLR0</name><description>PWM abnormal state clear 0</description><addressOffset>0x508</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_abnor_state_clr0</name><description>Clear abnormal state 0 (self-clearing)</description><bitRange>[15:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>PWM_ABNOR_STATE_CLR1</name><description>PWM abnormal state clear 1</description><addressOffset>0x50C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_abnor_state_clr1</name><description>Clear abnormal state 1 (self-clearing)</description><bitRange>[15:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>PWM_INT_MASK</name><description>PWM interrupt mask</description><addressOffset>0x510</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_int_mask</name><description>Interrupt mask: bit[0]=abnormal; bit[1]=stepping cycle end</description><bitRange>[1:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_DMA_EN</name><description>PWM DMA enable</description><addressOffset>0x514</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_dma_en</name><description>DMA enable: 0=disabled; 1=enabled</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>PWM_CFG_INT_CLR0</name><description>PWM stepping cycle end interrupt clear</description><addressOffset>0x518</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>pwm_cfg_int_clr0</name><description>Stepping cycle end interrupt clear (self-clearing)</description><bitRange>[15:0]</bitRange><access>write-only</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- DMA (Base: 0x4A000000)                                       -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>DMA</name>
+      <description>DMA controller with 4 channels</description>
+      <baseAddress>0x4A000000</baseAddress>
+      <interrupt><name>DMA_INT</name><value>59</value></interrupt>
+      <registers>
+        <register><name>DMAC_INT_ST</name><description>Interrupt status register</description><addressOffset>0x0004</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>int_st</name><description>Channel interrupt status (after mask)</description><bitRange>[7:0]</bitRange><access>read-only</access></field><field><name>int_trans_st</name><description>Channel transfer interrupt status (after mask)</description><bitRange>[15:8]</bitRange><access>read-only</access></field><field><name>int_err_st</name><description>Channel error interrupt status (after mask)</description><bitRange>[23:16]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>DMAC_INT_CLR</name><description>Interrupt clear register</description><addressOffset>0x0008</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>int_trans_clr</name><description>Clear channel transfer interrupt</description><bitRange>[7:0]</bitRange><access>read-write</access></field><field><name>int_err_clr</name><description>Clear channel error interrupt</description><bitRange>[15:8]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_ORI_INT_ST</name><description>Raw interrupt status register</description><addressOffset>0x000C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>ori_int_trans_st</name><description>Raw transfer interrupt status (before mask)</description><bitRange>[7:0]</bitRange><access>read-only</access></field><field><name>ori_int_err_st</name><description>Raw error interrupt status (before mask)</description><bitRange>[15:8]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>DMAC_EN_CHNS</name><description>Channel enable query register</description><addressOffset>0x0010</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>en_chns</name><description>Channel enable status: 0=disabled; 1=enabled</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>DMAC_BURST_REQ</name><description>Burst software request register</description><addressOffset>0x0014</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>last_burst_req</name><description>Last burst request per peripheral</description><bitRange>[15:0]</bitRange><access>read-write</access></field><field><name>burst_req</name><description>Burst request per peripheral</description><bitRange>[31:16]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_SINGLE_REQ</name><description>Single software request register</description><addressOffset>0x0018</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>last_single_req</name><description>Last single request per peripheral</description><bitRange>[15:0]</bitRange><access>read-write</access></field><field><name>single_req</name><description>Single request per peripheral</description><bitRange>[31:16]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CONFIG</name><description>DMA configuration register</description><addressOffset>0x001C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_en</name><description>DMAC enable: 0=disabled; 1=enabled</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_m1</name><description>Master 1 endianness: 0=little; 1=big</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>dmac_m2</name><description>Master 2 endianness: 0=little; 1=big</description><bitRange>[2:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_SYNC</name><description>DMA sync register</description><addressOffset>0x0020</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>damc_sync</name><description>DMA request sync: 0=enable sync; 1=disable sync</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+
+        <!-- Channel 0 -->
+        <register><name>DMAC_D_ADDR_0</name><description>Channel 0 destination address</description><addressOffset>0x0104</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_d_addr_0</name><description>Channel 0 destination address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_LLI_0</name><description>Channel 0 linked list register</description><addressOffset>0x0100</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_lm_0</name><description>Master for next LLI node: 0=Master1; 1=Master2</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_lli_0</name><description>Linked list address [31:2]</description><bitRange>[31:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_S_ADDR_0</name><description>Channel 0 source address</description><addressOffset>0x0110</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_s_addr_0</name><description>Channel 0 source address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CHN_CONTROL_0</name><description>Channel 0 control register</description><addressOffset>0x0114</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_trans_size_0</name><description>Transfer size</description><bitRange>[11:0]</bitRange><access>read-write</access></field><field><name>dmac_s_bsize_0</name><description>Source burst size: 000=1; 001=4; 010=8; 011=16; 100=32; 101=64; 110=128; 111=256</description><bitRange>[14:12]</bitRange><access>read-write</access></field><field><name>dmac_d_bsize_0</name><description>Destination burst size</description><bitRange>[17:15]</bitRange><access>read-write</access></field><field><name>dmac_s_width_0</name><description>Source width: 000=8bit; 001=16bit; 010=32bit</description><bitRange>[20:18]</bitRange><access>read-write</access></field><field><name>dmac_d_width_0</name><description>Destination width</description><bitRange>[23:21]</bitRange><access>read-write</access></field><field><name>dmac_s_master_0</name><description>Source master: 0=Master1; 1=Master2</description><bitRange>[24:24]</bitRange><access>read-write</access></field><field><name>dmac_d_master_0</name><description>Destination master</description><bitRange>[25:25]</bitRange><access>read-write</access></field><field><name>dmac_s_inc_0</name><description>Source address increment: 0=no; 1=yes</description><bitRange>[26:26]</bitRange><access>read-write</access></field><field><name>dmac_d_inc_0</name><description>Destination address increment</description><bitRange>[27:27]</bitRange><access>read-write</access></field><field><name>dmac_prot_0</name><description>Protection HPROT[2:0]</description><bitRange>[30:28]</bitRange><access>read-write</access></field><field><name>dmac_trans_int_0</name><description>Transfer complete interrupt enable</description><bitRange>[31:31]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CHN_CONFIG_0</name><description>Channel 0 configuration register</description><addressOffset>0x0108</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_chn_en_0</name><description>Channel enable: 0=disable; 1=enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_s_peripheral_0</name><description>Source peripheral select</description><bitRange>[4:1]</bitRange><access>read-write</access></field><field><name>dmac_d_peripheral_0</name><description>Destination peripheral select</description><bitRange>[8:5]</bitRange><access>read-write</access></field><field><name>dmac_flow_ctl_0</name><description>Flow control: 000=mem2mem; 001=mem2per; 010=per2mem; 011=per2per(DMAC); 100=per2per(dst); 101=mem2per(dst); 110=per2mem(src); 111=per2per(src)</description><bitRange>[11:9]</bitRange><access>read-write</access></field><field><name>dmac_int_en_0</name><description>Error interrupt mask: 0=masked; 1=unmasked</description><bitRange>[12:12]</bitRange><access>read-write</access></field><field><name>dmac_int_tc_0</name><description>Transfer complete interrupt mask: 0=masked; 1=unmasked</description><bitRange>[13:13]</bitRange><access>read-write</access></field><field><name>dmac_lock_0</name><description>Bus lock: 0=disabled; 1=enabled</description><bitRange>[14:14]</bitRange><access>read-write</access></field><field><name>dmac_active_0</name><description>FIFO has data: 0=no; 1=yes</description><bitRange>[15:15]</bitRange><access>read-only</access></field><field><name>dmac_halt_0</name><description>Halt: 0=allow DMA; 1=ignore DMA requests</description><bitRange>[16:16]</bitRange><access>read-write</access></field></fields></register>
+
+        <!-- Channel 1 -->
+        <register><name>DMAC_D_ADDR_1</name><description>Channel 1 destination address</description><addressOffset>0x0124</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_d_addr_1</name><description>Channel 1 destination address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_LLI_1</name><description>Channel 1 linked list register</description><addressOffset>0x0120</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_lm_1</name><description>Master for next LLI</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_lli_1</name><description>Linked list address [31:2]</description><bitRange>[31:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_S_ADDR_1</name><description>Channel 1 source address</description><addressOffset>0x0130</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_s_addr_1</name><description>Channel 1 source address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CHN_CONTROL_1</name><description>Channel 1 control register</description><addressOffset>0x0134</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_trans_size_1</name><description>Transfer size</description><bitRange>[11:0]</bitRange><access>read-write</access></field><field><name>dmac_s_bsize_1</name><description>Source burst size</description><bitRange>[14:12]</bitRange><access>read-write</access></field><field><name>dmac_d_bsize_1</name><description>Destination burst size</description><bitRange>[17:15]</bitRange><access>read-write</access></field><field><name>dmac_s_width_1</name><description>Source width</description><bitRange>[20:18]</bitRange><access>read-write</access></field><field><name>dmac_d_width_1</name><description>Destination width</description><bitRange>[23:21]</bitRange><access>read-write</access></field><field><name>dmac_s_inc_1</name><description>Source address increment</description><bitRange>[26:26]</bitRange><access>read-write</access></field><field><name>dmac_d_inc_1</name><description>Destination address increment</description><bitRange>[27:27]</bitRange><access>read-write</access></field><field><name>dmac_trans_int_1</name><description>Transfer complete interrupt enable</description><bitRange>[31:31]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CHN_CONFIG_1</name><description>Channel 1 configuration register</description><addressOffset>0x0128</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_chn_en_1</name><description>Channel enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_s_peripheral_1</name><description>Source peripheral</description><bitRange>[4:1]</bitRange><access>read-write</access></field><field><name>dmac_d_peripheral_1</name><description>Destination peripheral</description><bitRange>[8:5]</bitRange><access>read-write</access></field><field><name>dmac_flow_ctl_1</name><description>Flow control</description><bitRange>[11:9]</bitRange><access>read-write</access></field><field><name>dmac_int_en_1</name><description>Error interrupt mask</description><bitRange>[12:12]</bitRange><access>read-write</access></field><field><name>dmac_int_tc_1</name><description>Transfer complete interrupt mask</description><bitRange>[13:13]</bitRange><access>read-write</access></field><field><name>dmac_active_1</name><description>FIFO data status</description><bitRange>[15:15]</bitRange><access>read-only</access></field><field><name>dmac_halt_1</name><description>Halt control</description><bitRange>[16:16]</bitRange><access>read-write</access></field></fields></register>
+
+        <!-- Channel 2 -->
+        <register><name>DMAC_D_ADDR_2</name><description>Channel 2 destination address</description><addressOffset>0x0144</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_d_addr_2</name><description>Channel 2 destination address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_LLI_2</name><description>Channel 2 linked list register</description><addressOffset>0x0140</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_lm_2</name><description>Master for next LLI</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_lli_2</name><description>Linked list address [31:2]</description><bitRange>[31:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_S_ADDR_2</name><description>Channel 2 source address</description><addressOffset>0x0150</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_s_addr_2</name><description>Channel 2 source address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CHN_CONTROL_2</name><description>Channel 2 control register</description><addressOffset>0x0154</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_trans_size_2</name><description>Transfer size</description><bitRange>[11:0]</bitRange><access>read-write</access></field><field><name>dmac_s_bsize_2</name><description>Source burst size</description><bitRange>[14:12]</bitRange><access>read-write</access></field><field><name>dmac_d_bsize_2</name><description>Destination burst size</description><bitRange>[17:15]</bitRange><access>read-write</access></field><field><name>dmac_s_width_2</name><description>Source width</description><bitRange>[20:18]</bitRange><access>read-write</access></field><field><name>dmac_d_width_2</name><description>Destination width</description><bitRange>[23:21]</bitRange><access>read-write</access></field><field><name>dmac_s_inc_2</name><description>Source address increment</description><bitRange>[26:26]</bitRange><access>read-write</access></field><field><name>dmac_d_inc_2</name><description>Destination address increment</description><bitRange>[27:27]</bitRange><access>read-write</access></field><field><name>dmac_trans_int_2</name><description>Transfer complete interrupt enable</description><bitRange>[31:31]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CHN_CONFIG_2</name><description>Channel 2 configuration register</description><addressOffset>0x0148</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_chn_en_2</name><description>Channel enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_s_peripheral_2</name><description>Source peripheral</description><bitRange>[4:1]</bitRange><access>read-write</access></field><field><name>dmac_d_peripheral_2</name><description>Destination peripheral</description><bitRange>[8:5]</bitRange><access>read-write</access></field><field><name>dmac_flow_ctl_2</name><description>Flow control</description><bitRange>[11:9]</bitRange><access>read-write</access></field><field><name>dmac_active_2</name><description>FIFO data status</description><bitRange>[15:15]</bitRange><access>read-only</access></field><field><name>dmac_halt_2</name><description>Halt control</description><bitRange>[16:16]</bitRange><access>read-write</access></field></fields></register>
+
+        <!-- Channel 3 -->
+        <register><name>DMAC_D_ADDR_3</name><description>Channel 3 destination address</description><addressOffset>0x0164</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_d_addr_3</name><description>Channel 3 destination address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_LLI_3</name><description>Channel 3 linked list register</description><addressOffset>0x0160</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_lm_3</name><description>Master for next LLI</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_lli_3</name><description>Linked list address [31:2]</description><bitRange>[31:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_S_ADDR_3</name><description>Channel 3 source address</description><addressOffset>0x0170</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_s_addr_3</name><description>Channel 3 source address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CHN_CONTROL_3</name><description>Channel 3 control register</description><addressOffset>0x0174</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_trans_size_3</name><description>Transfer size</description><bitRange>[11:0]</bitRange><access>read-write</access></field><field><name>dmac_s_bsize_3</name><description>Source burst size</description><bitRange>[14:12]</bitRange><access>read-write</access></field><field><name>dmac_d_bsize_3</name><description>Destination burst size</description><bitRange>[17:15]</bitRange><access>read-write</access></field><field><name>dmac_s_width_3</name><description>Source width</description><bitRange>[20:18]</bitRange><access>read-write</access></field><field><name>dmac_d_width_3</name><description>Destination width</description><bitRange>[23:21]</bitRange><access>read-write</access></field><field><name>dmac_s_inc_3</name><description>Source address increment</description><bitRange>[26:26]</bitRange><access>read-write</access></field><field><name>dmac_d_inc_3</name><description>Destination address increment</description><bitRange>[27:27]</bitRange><access>read-write</access></field><field><name>dmac_trans_int_3</name><description>Transfer complete interrupt enable</description><bitRange>[31:31]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>DMAC_CHN_CONFIG_3</name><description>Channel 3 configuration register</description><addressOffset>0x0168</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dmac_chn_en_3</name><description>Channel enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dmac_s_peripheral_3</name><description>Source peripheral</description><bitRange>[4:1]</bitRange><access>read-write</access></field><field><name>dmac_d_peripheral_3</name><description>Destination peripheral</description><bitRange>[8:5]</bitRange><access>read-write</access></field><field><name>dmac_flow_ctl_3</name><description>Flow control</description><bitRange>[11:9]</bitRange><access>read-write</access></field><field><name>dmac_active_3</name><description>FIFO data status</description><bitRange>[15:15]</bitRange><access>read-only</access></field><field><name>dmac_halt_3</name><description>Halt control</description><bitRange>[16:16]</bitRange><access>read-write</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- SFC_CFG: SPI Flash Controller (Base: 0x48000000)            -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>SFC_CFG</name>
+      <description>SPI Flash Controller configuration</description>
+      <baseAddress>0x48000000</baseAddress>
+      <interrupt><name>SFC_INT</name><value>58</value></interrupt>
+      <registers>
+        <register><name>GLOBAL_CONFIG</name><description>Global configuration register</description><addressOffset>0x0100</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>mode</name><description>SPI mode: 0=Mode0; 1=Mode3</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>wp_en</name><description>Hardware write protect: 0=disabled; 1=enabled</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>flash_addr_mode</name><description>Address mode: 0=3byte; 1=4byte</description><bitRange>[2:2]</bitRange><access>read-write</access></field><field><name>rd_delay</name><description>SPI read data delay: 000=0.5~1clk; 001=1~1.5clk; etc.</description><bitRange>[5:3]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TIMING</name><description>Timing configuration register</description><addressOffset>0x0110</addressOffset><resetValue>0x0000660F</resetValue><fields><field><name>tshsl</name><description>Inter-operation delay: (n+2) clock cycles</description><bitRange>[3:0]</bitRange><access>read-write</access></field><field><name>tcss</name><description>CS setup time: (n+1) clock cycles</description><bitRange>[10:8]</bitRange><access>read-write</access></field><field><name>tcsh</name><description>CS hold time: (n+1) clock cycles</description><bitRange>[14:12]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>INT_RAW_STATUS</name><description>Interrupt raw status register</description><addressOffset>0x0120</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>cmd_op_end_raw_status</name><description>Command operation end raw status</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>dma_done_int_raw_status</name><description>DMA done raw status</description><bitRange>[1:1]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>INT_STATUS</name><description>Interrupt status register (masked)</description><addressOffset>0x0124</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>cmd_op_end_status</name><description>Command operation end status</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>dma_done_int_status</name><description>DMA done status</description><bitRange>[1:1]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>INT_MASK</name><description>Interrupt mask register</description><addressOffset>0x0128</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>cmd_op_end_int_mask</name><description>Command end mask: 0=masked; 1=unmasked</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dma_done_int_mask</name><description>DMA done mask</description><bitRange>[1:1]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>INT_CLEAR</name><description>Interrupt clear register</description><addressOffset>0x012C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>cmd_op_end_int_clr</name><description>Command end interrupt clear (self-clearing)</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>dma_done_int_clr</name><description>DMA done interrupt clear (self-clearing)</description><bitRange>[1:1]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>SOFT_RST_MASK</name><description>Soft reset mask register</description><addressOffset>0x0130</addressOffset><resetValue>0x00000001</resetValue><fields><field><name>sfc_bus_soft_rst_mask</name><description>SFC bus soft reset mask: 0=reset active; 1=reset masked</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>BUS_CONFIG1</name><description>Bus operation config 1</description><addressOffset>0x0200</addressOffset><resetValue>0x80800300</resetValue><fields><field><name>rd_mem_if_type</name><description>Read SPI interface type: 000=Standard; 001=Dual I/O; 010=Dual-IO; 101=Quad-Input; 110=Quad-IO</description><bitRange>[2:0]</bitRange><access>read-write</access></field><field><name>rd_dummy_bytes</name><description>Read dummy bytes: 000=0; 001=1; etc.</description><bitRange>[5:3]</bitRange><access>read-write</access></field><field><name>rd_prefetch_cnt</name><description>Read prefetch count: 00=none; 01=1clk; 10=2clk; 11=3clk</description><bitRange>[7:6]</bitRange><access>read-write</access></field><field><name>rd_ins</name><description>Read instruction code</description><bitRange>[15:8]</bitRange><access>read-write</access></field><field><name>wr_mem_if_type</name><description>Write SPI interface type</description><bitRange>[18:16]</bitRange><access>read-write</access></field><field><name>wr_dummy_bytes</name><description>Write dummy bytes</description><bitRange>[21:19]</bitRange><access>read-write</access></field><field><name>wr_ins</name><description>Write instruction code</description><bitRange>[29:22]</bitRange><access>read-write</access></field><field><name>wr_enable</name><description>Bus write enable</description><bitRange>[30:30]</bitRange><access>read-write</access></field><field><name>rd_enable</name><description>Bus read enable</description><bitRange>[31:31]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>BUS_CONFIG2</name><description>Bus operation config 2</description><addressOffset>0x0204</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wip_locate</name><description>WIP bit position in Flash status register: 000=bit0; etc.</description><bitRange>[2:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>BUS_DMA_CTRL</name><description>DMA operation control register</description><addressOffset>0x0240</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dma_start</name><description>DMA transfer enable (auto-clears)</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>dma_rw</name><description>DMA direction: 0=write; 1=read</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>dma_sel_cs</name><description>DMA chip select: 0=CS0; 1=CS1</description><bitRange>[4:4]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>BUS_DMA_MEM_SADDR</name><description>DMA memory start address</description><addressOffset>0x0244</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dma_mem_saddr</name><description>DMA memory start address (0x00100000~0x00BFFFFF)</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>BUS_DMA_FLASH_SADDR</name><description>DMA Flash start address</description><addressOffset>0x0248</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dma_flash_saddr</name><description>DMA Flash start address</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>BUS_DMA_LEN</name><description>DMA transfer length</description><addressOffset>0x024C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dma_len</name><description>DMA length (n+1 bytes)</description><bitRange>[29:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>BUS_DMA_AHB_CTRL</name><description>DMA AHB burst control</description><addressOffset>0x0250</addressOffset><resetValue>0x00000007</resetValue><fields><field><name>incr4_en</name><description>INCR4 burst enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>incr8_en</name><description>INCR8 burst enable</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>incr16_en</name><description>INCR16 burst enable</description><bitRange>[2:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>CMD_CONFIG</name><description>Command operation config</description><addressOffset>0x0300</addressOffset><resetValue>0x00007E00</resetValue><fields><field><name>start</name><description>Command start (auto-clears)</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>sel_cs</name><description>Chip select: 0=CS0; 1=CS1</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>addr_en</name><description>Address present: 0=no; 1=yes</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>dummy_byte_cnt</name><description>Dummy bytes: 000=0; 001=1; etc.</description><bitRange>[6:4]</bitRange><access>read-write</access></field><field><name>data_en</name><description>Data present: 0=no; 1=yes</description><bitRange>[7:7]</bitRange><access>read-write</access></field><field><name>rw</name><description>Data direction: 0=write; 1=read</description><bitRange>[8:8]</bitRange><access>read-write</access></field><field><name>data_cnt</name><description>Data length (n+1 bytes)</description><bitRange>[14:9]</bitRange><access>read-write</access></field><field><name>mem_if_type</name><description>SPI interface type: 000=Standard; 001=Dual; 010=Dual-IO; 101=Quad-Input; 110=Quad-IO</description><bitRange>[19:17]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>CMD_INS</name><description>Command instruction register</description><addressOffset>0x0308</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>reg_ins</name><description>Instruction code</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>CMD_ADDR</name><description>Command address register</description><addressOffset>0x030C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>cmd_addr</name><description>Operation address</description><bitRange>[29:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>CMD_DATABUF_0</name><description>Command data buffer 0</description><addressOffset>0x0400</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>cmd_databuf_0</name><description>Data buffer 0</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LEA_LP_EN</name><description>LEA control register</description><addressOffset>0x1300</addressOffset><resetValue>0x00000001</resetValue><fields><field><name>lea_lp_en</name><description>AES low power: 0=disabled; 1=enabled</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LEA_DFX_INFO</name><description>LEA DFX register</description><addressOffset>0x1304</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>lea_dfx_info</name><description>AES DFX observation</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>LEA_IV_VLD</name><description>LEA IV valid register</description><addressOffset>0x1600</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>lea_iv_vld</name><description>AES IV value valid (auto-clears after sync)</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- SPI0 / SPI_M0 (Base: 0x44020000) - v151                      -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>SPI0</name>
+      <description>SPI0 master/slave controller (SSI v151)</description>
+      <baseAddress>0x44020000</baseAddress>
+      <interrupt><name>SPI_INT</name><value>43</value></interrupt>
+      <registers>
+        <register><name>SPI_ER</name><description>SPI enable register</description><addressOffset>0x00</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>spi_en</name><description>SPI enable: 0=disabled; 1=enabled</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_CTRA</name><description>SPI control register 0</description><addressOffset>0x04</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>soe</name><description>Shift register loop test: 0=normal; 1=loopback</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>scph</name><description>Clock phase: 0=first edge sample; 1=second edge sample</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>scpol</name><description>Clock polarity: 0=low idle; 1=high idle</description><bitRange>[4:4]</bitRange><access>read-write</access></field><field><name>dfs32</name><description>Data frame size in 32-bit mode (0=4bit; up to 31=35bit)</description><bitRange>[17:13]</bitRange><access>read-write</access></field><field><name>trsm</name><description>Transfer mode: 00=TX/RX; 01=TX only; 10=RX only</description><bitRange>[19:18]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_CTRB</name><description>SPI control register 1 (master only)</description><addressOffset>0x08</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>ndf</name><description>Number of data frames (master TX only mode)</description><bitRange>[15:0]</bitRange><access>read-write</access></field><field><name>ssi_clk_stretch_en</name><description>Clock stretch enable</description><bitRange>[27:27]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_ENHCTL</name><description>Enhanced control register (Dual/Quad/Octal)</description><addressOffset>0x0C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>spi_dual_en</name><description>Dual SPI mode enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>spi_quad_en</name><description>Quad SPI mode enable</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>spi_oct_en</name><description>Octal SPI mode enable</description><bitRange>[2:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_BRS</name><description>Baud rate select register</description><addressOffset>0x14</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>clk_div</name><description>Clock divider (master): SCK = SSI_CLK / (2 * (1 + CLK_DIV))</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_DCR</name><description>DMA control register</description><addressOffset>0x18</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tdmae</name><description>TX DMA enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>rdmae</name><description>RX DMA enable</description><bitRange>[1:1]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_DRDL</name><description>DMA RX data level</description><addressOffset>0x1C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dma_rx_data_level</name><description>DMA RX FIFO threshold</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_DTDL</name><description>DMA TX data level</description><addressOffset>0x20</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dma_tx_data_level</name><description>DMA TX FIFO threshold</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_DR</name><description>Data register (FIFO read/write)</description><addressOffset>0x60</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>dr</name><description>Write: push to TX FIFO; Read: pop from RX FIFO</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_RAINSR</name><description>Raw interrupt status register</description><addressOffset>0xBC</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>txe_irq</name><description>TX FIFO empty raw status</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>txo_irq</name><description>TX FIFO overflow raw status</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>rxu_irq</name><description>RX FIFO underflow raw status</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>rxo_irq</name><description>RX FIFO overflow raw status</description><bitRange>[3:3]</bitRange><access>read-only</access></field><field><name>rxf_irq</name><description>RX FIFO full raw status</description><bitRange>[4:4]</bitRange><access>read-only</access></field><field><name>mst_irq</name><description>Multi-master contention raw status</description><bitRange>[5:5]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>SPI_INSR</name><description>Interrupt status register (masked)</description><addressOffset>0xC0</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>txe_is</name><description>TX empty interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>txo_is</name><description>TX overflow interrupt status</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>rxu_is</name><description>RX underflow interrupt status</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>rxo_is</name><description>RX overflow interrupt status</description><bitRange>[3:3]</bitRange><access>read-only</access></field><field><name>rxf_is</name><description>RX full interrupt status</description><bitRange>[4:4]</bitRange><access>read-only</access></field><field><name>mst_is</name><description>Multi-master interrupt status</description><bitRange>[5:5]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>SPI_INMAR</name><description>Interrupt mask register</description><addressOffset>0xC4</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>txe_im</name><description>TX empty interrupt mask</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>txo_im</name><description>TX overflow interrupt mask</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>rxu_im</name><description>RX underflow interrupt mask</description><bitRange>[2:2]</bitRange><access>read-write</access></field><field><name>rxo_im</name><description>RX overflow interrupt mask</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>rxf_im</name><description>RX full interrupt mask</description><bitRange>[4:4]</bitRange><access>read-write</access></field><field><name>mst_im</name><description>Multi-master interrupt mask</description><bitRange>[5:5]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_SLENR</name><description>Slave enable register (master only)</description><addressOffset>0xC8</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>slave_enable</name><description>Slave select enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_TWLR</name><description>TX FIFO threshold level</description><addressOffset>0xCC</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tx_fifo_threshold</name><description>TX FIFO threshold level</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_TLR</name><description>TX FIFO level register</description><addressOffset>0xD0</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tx_fifo_level</name><description>TX FIFO data level</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>SPI_RWLR</name><description>RX FIFO threshold level</description><addressOffset>0xD8</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>rx_fifo_threshold</name><description>RX FIFO threshold level</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SPI_RLR</name><description>RX FIFO level register</description><addressOffset>0xDC</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>rx_fifo_level</name><description>RX FIFO data level</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>SPI_WSR</name><description>Status register</description><addressOffset>0xE4</addressOffset><resetValue>0x00000006</resetValue><fields><field><name>busy</name><description>SPI busy flag</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>txfnf</name><description>TX FIFO not full</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>txfe</name><description>TX FIFO empty</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>rxfne</name><description>RX FIFO not empty</description><bitRange>[3:3]</bitRange><access>read-only</access></field><field><name>rxfo</name><description>RX FIFO overflow</description><bitRange>[4:4]</bitRange><access>read-only</access></field><field><name>txfo</name><description>TX FIFO overflow</description><bitRange>[5:5]</bitRange><access>read-only</access></field><field><name>dcm</name><description>Data conflict mask</description><bitRange>[6:6]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>SPI_ICR</name><description>Interrupt clear register</description><addressOffset>0xF8</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>txo_ic</name><description>TX overflow interrupt clear</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>rxu_ic</name><description>RX underflow interrupt clear</description><bitRange>[1:1]</bitRange><access>write-only</access></field><field><name>rxo_ic</name><description>RX overflow interrupt clear</description><bitRange>[2:2]</bitRange><access>write-only</access></field><field><name>mst_ic</name><description>Multi-master interrupt clear</description><bitRange>[3:3]</bitRange><access>write-only</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- SPI1 (QSPI_0) derived from SPI0 -->
+    <peripheral derivedFrom="SPI0">
+      <name>SPI1</name>
+      <description>SPI1/QSPI controller (SSI v151)</description>
+      <baseAddress>0x44021000</baseAddress>
+      <interrupt><name>QSPI_INT</name><value>52</value></interrupt>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- I2S/SIO (Base: 0x44025000) - v151                            -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>I2S</name>
+      <description>I2S/SIO synchronous audio interface (v151)</description>
+      <baseAddress>0x44025000</baseAddress>
+      <interrupt><name>I2S_INT</name><value>51</value></interrupt>
+      <registers>
+        <register><name>VERSION</name><description>Version and loopback register</description><addressOffset>0x3C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>version</name><description>IP version</description><bitRange>[7:0]</bitRange><access>read-only</access></field><field><name>loopback_mode</name><description>Loopback mode enable</description><bitRange>[8:8]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>MODE</name><description>I2S/PCM mode register</description><addressOffset>0x40</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>channels</name><description>Number of channels: 0=2ch; 1=4ch; 2=6ch; 3=8ch</description><bitRange>[1:0]</bitRange><access>read-write</access></field><field><name>clk_edge</name><description>Clock edge: 0=rising; 1=falling</description><bitRange>[2:2]</bitRange><access>read-write</access></field><field><name>master_slave</name><description>Mode: 0=slave; 1=master</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>pcm_mode</name><description>PCM mode: 0=I2S; 1=PCM</description><bitRange>[4:4]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>INTSTATUS</name><description>Interrupt status register</description><addressOffset>0x44</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>rx_int</name><description>RX interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>tx_int</name><description>TX interrupt status</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>rx_overflow</name><description>RX overflow status</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>tx_underflow</name><description>TX underflow status</description><bitRange>[3:3]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>INTCLR</name><description>Interrupt clear register</description><addressOffset>0x48</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>rx_int_clr</name><description>Clear RX interrupt</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>tx_int_clr</name><description>Clear TX interrupt</description><bitRange>[1:1]</bitRange><access>write-only</access></field><field><name>rx_overflow_clr</name><description>Clear RX overflow</description><bitRange>[2:2]</bitRange><access>write-only</access></field><field><name>tx_underflow_clr</name><description>Clear TX underflow</description><bitRange>[3:3]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>LEFT_TX</name><description>TX left channel data</description><addressOffset>0x4C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>left_tx_data</name><description>TX left channel data</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>RIGHT_TX</name><description>TX right channel data</description><addressOffset>0x50</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>right_tx_data</name><description>TX right channel data</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LEFT_RX</name><description>RX left channel data</description><addressOffset>0x54</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>left_rx_data</name><description>RX left channel data</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>RIGHT_RX</name><description>RX right channel data</description><addressOffset>0x58</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>right_rx_data</name><description>RX right channel data</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>CT_SET</name><description>Control set register</description><addressOffset>0x5C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tx_en</name><description>TX enable set</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>rx_en</name><description>RX enable set</description><bitRange>[1:1]</bitRange><access>write-only</access></field><field><name>tx_rst</name><description>TX reset set</description><bitRange>[2:2]</bitRange><access>write-only</access></field><field><name>rx_rst</name><description>RX reset set</description><bitRange>[3:3]</bitRange><access>write-only</access></field><field><name>tx_intr_en</name><description>TX interrupt enable set</description><bitRange>[4:4]</bitRange><access>write-only</access></field><field><name>rx_intr_en</name><description>RX interrupt enable set</description><bitRange>[5:5]</bitRange><access>write-only</access></field><field><name>merge_en</name><description>Merge enable set</description><bitRange>[6:6]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>CT_CLR</name><description>Control clear register</description><addressOffset>0x60</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tx_en</name><description>TX enable clear</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>rx_en</name><description>RX enable clear</description><bitRange>[1:1]</bitRange><access>write-only</access></field><field><name>tx_intr_en</name><description>TX interrupt disable</description><bitRange>[4:4]</bitRange><access>write-only</access></field><field><name>rx_intr_en</name><description>RX interrupt disable</description><bitRange>[5:5]</bitRange><access>write-only</access></field><field><name>merge_en</name><description>Merge disable</description><bitRange>[6:6]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>FIFO_THRESHOLD</name><description>FIFO threshold register</description><addressOffset>0x64</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tx_threshold</name><description>TX FIFO threshold</description><bitRange>[7:0]</bitRange><access>read-write</access></field><field><name>rx_threshold</name><description>RX FIFO threshold</description><bitRange>[15:8]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>RX_STA</name><description>RX status register</description><addressOffset>0x68</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>left_depth</name><description>RX left FIFO depth</description><bitRange>[7:0]</bitRange><access>read-only</access></field><field><name>right_depth</name><description>RX right FIFO depth</description><bitRange>[15:8]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TX_STA</name><description>TX status register</description><addressOffset>0x6C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>left_depth</name><description>TX left FIFO depth</description><bitRange>[7:0]</bitRange><access>read-only</access></field><field><name>right_depth</name><description>TX right FIFO depth</description><bitRange>[15:8]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>DATA_WIDTH_SET</name><description>Data width register</description><addressOffset>0x78</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tx_mode</name><description>TX data width mode</description><bitRange>[2:0]</bitRange><access>read-write</access></field><field><name>rx_mode</name><description>RX data width mode</description><bitRange>[10:8]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>SIGNED_EXT</name><description>Signed extension enable</description><addressOffset>0x84</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>signed_ext_en</name><description>Signed extension enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>INTMASK</name><description>Interrupt mask register</description><addressOffset>0x8C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>rx_int_mask</name><description>RX interrupt mask</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>tx_int_mask</name><description>TX interrupt mask</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>rx_overflow_mask</name><description>RX overflow mask</description><bitRange>[2:2]</bitRange><access>read-write</access></field><field><name>tx_underflow_mask</name><description>TX underflow mask</description><bitRange>[3:3]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2S_CRG</name><description>I2S clock/reset generator</description><addressOffset>0x90</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>bclk_div</name><description>BCLK divider</description><bitRange>[7:0]</bitRange><access>read-write</access></field><field><name>clk_en</name><description>Clock enable</description><bitRange>[8:8]</bitRange><access>read-write</access></field><field><name>clk_sel</name><description>Clock source select</description><bitRange>[9:9]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2S_BCLK_DIV_NUM</name><description>BCLK divider number</description><addressOffset>0x94</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>bclk_div_num</name><description>BCLK divider number</description><bitRange>[6:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2S_FS_DIV_NUM</name><description>FS divider number</description><addressOffset>0x98</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>fs_div_num</name><description>FS divider number</description><bitRange>[9:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>I2S_FS_DIV_RATIO_NUM</name><description>FS divider ratio number</description><addressOffset>0x9C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>fs_div_ratio_num</name><description>FS divider ratio number</description><bitRange>[10:0]</bitRange><access>read-write</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- LSADC (Base: 0x4400C000) - v154                              -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>LSADC</name>
+      <description>Low-speed ADC controller (12-bit SAR, 6 channels, v154)</description>
+      <baseAddress>0x4400C000</baseAddress>
+      <interrupt><name>LSADC_INTR</name><value>72</value></interrupt>
+      <registers>
+        <register><name>LSADC_CTRL_0</name><description>ADC control register 0</description><addressOffset>0x00</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>lsadc_ctrl_0</name><description>ADC control 0 configuration</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LSADC_CTRL_1</name><description>ADC control register 1</description><addressOffset>0x04</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>equ_model_sel</name><description>Equal model select (6-bit)</description><bitRange>[6:1]</bitRange><access>read-write</access></field><field><name>sample_cnt</name><description>Sample count</description><bitRange>[11:8]</bitRange><access>read-write</access></field><field><name>start_cnt</name><description>Start count</description><bitRange>[19:16]</bitRange><access>read-write</access></field><field><name>cast_cnt</name><description>Cast count</description><bitRange>[27:24]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LSADC_CTRL_2</name><description>ADC control register 2</description><addressOffset>0x08</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>lsadc_ctrl_2</name><description>ADC control 2 configuration</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LSADC_CTRL_3</name><description>ADC control register 3</description><addressOffset>0x0C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>lsadc_ctrl_3</name><description>ADC control 3 configuration</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LSADC_CTRL_4</name><description>ADC control register 4</description><addressOffset>0x10</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>lsadc_ctrl_4</name><description>ADC control 4 configuration</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LSADC_CTRL_6</name><description>ADC scan start/stop register</description><addressOffset>0x14</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>lsadc_start</name><description>Start ADC scan: 1=start</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>lsadc_stop</name><description>Stop ADC scan: 1=stop</description><bitRange>[1:1]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>LSADC_CTRL_7</name><description>ADC enable register</description><addressOffset>0x18</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>da_lsadc_rstn</name><description>ADC reset (active low)</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>da_lsadc_en</name><description>ADC enable (16-bit, one per channel)</description><bitRange>[31:16]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>LSADC_FIFO_DATA</name><description>ADC FIFO data register</description><addressOffset>0x100</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>data</name><description>ADC conversion data (14-bit)</description><bitRange>[13:0]</bitRange><access>read-only</access></field><field><name>channel</name><description>Channel number (3-bit)</description><bitRange>[16:14]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>CFG_CIC_FILTER_EN</name><description>CIC filter enable register</description><addressOffset>0x200</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>cic_filter_en</name><description>CIC filter enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>CFG_CIC_OSR</name><description>CIC oversampling ratio register</description><addressOffset>0x204</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>cic_osr</name><description>CIC oversampling ratio</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>CFG_DATA_SEL</name><description>Data select register</description><addressOffset>0x208</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>data_sel</name><description>Data output select</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>CFG_OFFSET</name><description>Offset register</description><addressOffset>0x20C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>offset</name><description>ADC offset correction</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>CFG_GAIN</name><description>Gain register</description><addressOffset>0x210</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>gain</name><description>ADC gain correction</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- TSENSOR (Base: 0x4400E000) - v151                            -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>TSENSOR</name>
+      <description>Temperature sensor controller (v151)</description>
+      <baseAddress>0x4400E000</baseAddress>
+      <interrupt><name>TSENSOR_INT</name><value>48</value></interrupt>
+      <registers>
+        <register><name>TSENSOR_CTL_ID</name><description>Temperature sensor control ID</description><addressOffset>0x00</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tsensor_ctl_id</name><description>Control ID</description><bitRange>[15:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TSENSOR_REG0</name><description>Common register 0</description><addressOffset>0x10</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tsensor_reg0</name><description>Common configuration register 0</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_REG1</name><description>Common register 1</description><addressOffset>0x14</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tsensor_reg1</name><description>Common configuration register 1</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_REG2</name><description>Common register 2</description><addressOffset>0x18</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tsensor_reg2</name><description>Common configuration register 2</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_REG3</name><description>Common register 3</description><addressOffset>0x1C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tsensor_reg3</name><description>Common configuration register 3</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_START</name><description>Temperature sensor start register</description><addressOffset>0x300</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tsensor_start</name><description>Write 1 to refresh temperature reading</description><bitRange>[0:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>TSENSOR_CTRL</name><description>Temperature sensor control register</description><addressOffset>0x304</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>tsensor_enable</name><description>Temperature sensor enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>tsensor_mode</name><description>Temperature sensor mode</description><bitRange>[2:1]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_STS</name><description>Temperature sensor status register</description><addressOffset>0x308</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>clr</name><description>Clear status</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>rdy</name><description>Data ready flag</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>data</name><description>Temperature code (10-bit, range 114-896 for -40C to 125C)</description><bitRange>[11:2]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TSENSOR_CTRL1</name><description>Temperature sensor control 1</description><addressOffset>0x310</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>temp_calib</name><description>Temperature calibration enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>temp_ct_sel</name><description>Temperature CT select</description><bitRange>[2:1]</bitRange><access>read-write</access></field><field><name>dft</name><description>DFT mode enable</description><bitRange>[4:4]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_TEMP_HIGH_LIMIT</name><description>High temperature limit</description><addressOffset>0x314</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>temp_high_limit</name><description>High temperature threshold (10-bit code)</description><bitRange>[9:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_TEMP_LOW_LIMIT</name><description>Low temperature limit</description><addressOffset>0x318</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>temp_low_limit</name><description>Low temperature threshold (10-bit code)</description><bitRange>[9:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_OVER_TEMP</name><description>Over-temperature threshold</description><addressOffset>0x31C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>over_temp</name><description>Over-temperature threshold (10-bit code)</description><bitRange>[9:0]</bitRange><access>read-write</access></field><field><name>over_temp_en</name><description>Over-temperature interrupt enable</description><bitRange>[10:10]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_TEMP_INT_EN</name><description>Temperature interrupt enable</description><addressOffset>0x320</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>done_int_en</name><description>Conversion done interrupt enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>out_thresh_int_en</name><description>Out-of-threshold interrupt enable</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>overtemp_int_en</name><description>Over-temperature interrupt enable</description><bitRange>[2:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_TEMP_INT_CLR</name><description>Temperature interrupt clear</description><addressOffset>0x324</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>done_int_clr</name><description>Clear done interrupt</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>out_thresh_int_clr</name><description>Clear out-of-threshold interrupt</description><bitRange>[1:1]</bitRange><access>write-only</access></field><field><name>overtemp_int_clr</name><description>Clear over-temperature interrupt</description><bitRange>[2:2]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>TSENSOR_TEMP_INT_STS</name><description>Temperature interrupt status</description><addressOffset>0x328</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>done_int_sts</name><description>Conversion done interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field><field><name>out_thresh_int_sts</name><description>Out-of-threshold interrupt status</description><bitRange>[1:1]</bitRange><access>read-only</access></field><field><name>overtemp_int_sts</name><description>Over-temperature interrupt status</description><bitRange>[2:2]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TSENSOR_AUTO_REFRESH_PERIOD</name><description>Auto refresh period</description><addressOffset>0x330</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>auto_refresh_period</name><description>Auto refresh period in 32kHz clock cycles</description><bitRange>[15:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TSENSOR_AUTO_REFRESH_CFG</name><description>Auto refresh configuration</description><addressOffset>0x334</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>auto_refresh_en</name><description>Auto refresh enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- Timer (Base: 0x44002000) - v150                               -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>TIMER</name>
+      <description>Timer module with 3 independent 32-bit timers (v150)</description>
+      <baseAddress>0x44002000</baseAddress>
+      <registers>
+        <!-- Common timer registers -->
+        <register><name>ABNOR_INTR_RAW</name><description>Abnormal interrupt raw status</description><addressOffset>0x60</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>abnor_intr_raw</name><description>Abnormal interrupt raw status for all timers</description><bitRange>[2:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>ABNOR_IMSK</name><description>Abnormal interrupt mask</description><addressOffset>0x64</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>abnor_imsk</name><description>Abnormal interrupt mask for all timers</description><bitRange>[2:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>ABNOR_INTR_STAT</name><description>Abnormal interrupt status</description><addressOffset>0x68</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>abnor_intr_stat</name><description>Abnormal interrupt status for all timers</description><bitRange>[2:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>EOI_REN</name><description>End-of-interrupt register</description><addressOffset>0x78</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>eoi</name><description>Clear interrupts for all timers (read to clear)</description><bitRange>[2:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>RAW_INTR_STAT</name><description>Raw interrupt status</description><addressOffset>0x7C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>raw_intr</name><description>Raw interrupt status for all timers</description><bitRange>[2:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>INTR_STAT</name><description>Interrupt status (masked)</description><addressOffset>0x80</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>intr_stat</name><description>Interrupt status for all timers (after mask)</description><bitRange>[2:0]</bitRange><access>read-only</access></field></fields></register>
+
+        <!-- Timer 0 -->
+        <register><name>TIMER0_LOAD_COUNT</name><description>Timer 0 load count</description><addressOffset>0x100</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>load_count</name><description>Timer 0 load count value</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TIMER0_CURRENT_VALUE</name><description>Timer 0 current value</description><addressOffset>0x108</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>current_value</name><description>Timer 0 current count value</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TIMER0_CONTROL</name><description>Timer 0 control register</description><addressOffset>0x110</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>enable</name><description>Timer enable: 0=disabled; 1=enabled</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>mode</name><description>Timer mode: 00=free running; 01=one-shot; 10=periodic</description><bitRange>[2:1]</bitRange><access>read-write</access></field><field><name>int_mask</name><description>Interrupt mask: 0=unmasked; 1=masked</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>rstfsm</name><description>Reset FSM: 1=reset timer FSM</description><bitRange>[4:4]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>TIMER0_EOI</name><description>Timer 0 end-of-interrupt</description><addressOffset>0x114</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>eoi</name><description>Read to clear timer 0 interrupt</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TIMER0_RAW_INTR</name><description>Timer 0 raw interrupt status</description><addressOffset>0x118</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>raw_intr</name><description>Raw interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+
+        <!-- Timer 1 -->
+        <register><name>TIMER1_LOAD_COUNT</name><description>Timer 1 load count</description><addressOffset>0x200</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>load_count</name><description>Timer 1 load count value</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TIMER1_CURRENT_VALUE</name><description>Timer 1 current value</description><addressOffset>0x208</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>current_value</name><description>Timer 1 current count value</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TIMER1_CONTROL</name><description>Timer 1 control register</description><addressOffset>0x210</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>enable</name><description>Timer enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>mode</name><description>Timer mode</description><bitRange>[2:1]</bitRange><access>read-write</access></field><field><name>int_mask</name><description>Interrupt mask</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>rstfsm</name><description>Reset FSM</description><bitRange>[4:4]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>TIMER1_EOI</name><description>Timer 1 end-of-interrupt</description><addressOffset>0x214</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>eoi</name><description>Read to clear timer 1 interrupt</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TIMER1_RAW_INTR</name><description>Timer 1 raw interrupt status</description><addressOffset>0x218</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>raw_intr</name><description>Raw interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+
+        <!-- Timer 2 -->
+        <register><name>TIMER2_LOAD_COUNT</name><description>Timer 2 load count</description><addressOffset>0x300</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>load_count</name><description>Timer 2 load count value</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>TIMER2_CURRENT_VALUE</name><description>Timer 2 current value</description><addressOffset>0x308</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>current_value</name><description>Timer 2 current count value</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TIMER2_CONTROL</name><description>Timer 2 control register</description><addressOffset>0x310</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>enable</name><description>Timer enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>mode</name><description>Timer mode</description><bitRange>[2:1]</bitRange><access>read-write</access></field><field><name>int_mask</name><description>Interrupt mask</description><bitRange>[3:3]</bitRange><access>read-write</access></field><field><name>rstfsm</name><description>Reset FSM</description><bitRange>[4:4]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>TIMER2_EOI</name><description>Timer 2 end-of-interrupt</description><addressOffset>0x314</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>eoi</name><description>Read to clear timer 2 interrupt</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>TIMER2_RAW_INTR</name><description>Timer 2 raw interrupt status</description><addressOffset>0x318</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>raw_intr</name><description>Raw interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- WDT (Base: 0x40006000) - v151                                 -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>WDT</name>
+      <description>Watchdog timer (v151)</description>
+      <baseAddress>0x40006000</baseAddress>
+      <registers>
+        <register><name>WDT_LOCK</name><description>Watchdog lock register</description><addressOffset>0x00</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_lock</name><description>Write 0x5A5A5A5A to unlock, other values lock</description><bitRange>[31:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>WDT_LOAD</name><description>Watchdog load value</description><addressOffset>0x04</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_load</name><description>Load count value (24-bit, low 8 bits reserved)</description><bitRange>[31:8]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>WDT_RESTART</name><description>Watchdog restart register</description><addressOffset>0x08</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_restart</name><description>Write anything except 0x5A5A5A5A to restart counter</description><bitRange>[31:0]</bitRange><access>write-only</access></field></fields></register>
+        <register><name>WDT_EOI</name><description>Watchdog interrupt clear (read to clear)</description><addressOffset>0x0C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_eoi</name><description>Read to clear watchdog interrupt</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>WDT_CR</name><description>Watchdog control register</description><addressOffset>0x10</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_en</name><description>Watchdog enable: 0=disabled; 1=enabled</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>rst_en</name><description>Reset enable: 0=no reset on timeout; 1=reset on timeout</description><bitRange>[2:2]</bitRange><access>read-write</access></field><field><name>rst_pl</name><description>Reset pulse length: 000=2 clocks; up to 111=256 clocks</description><bitRange>[5:3]</bitRange><access>read-write</access></field><field><name>wdt_imsk</name><description>Interrupt mask: 0=unmasked; 1=masked</description><bitRange>[6:6]</bitRange><access>read-write</access></field><field><name>wdt_mode</name><description>Mode: 0=one interrupt then reset; 1=two interrupts then reset</description><bitRange>[7:7]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>WDT_CNT</name><description>Watchdog current counter value</description><addressOffset>0x14</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_cnt</name><description>Current counter value</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>WDT_RAW_INTR</name><description>Watchdog raw interrupt status</description><addressOffset>0x18</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_raw_intr</name><description>Raw interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>WDT_INTR</name><description>Watchdog interrupt status (masked)</description><addressOffset>0x1C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_intr</name><description>Interrupt status after mask</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>WDT_LPIF_STATE</name><description>Watchdog low power state</description><addressOffset>0x20</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_lpif_state</name><description>Low power interface state</description><bitRange>[2:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>WDT_STATUS</name><description>Watchdog status</description><addressOffset>0x24</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>wdt_status</name><description>Status: 0=busy; 1=free</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>WDT_CCVR_EN</name><description>Watchdog counter value request</description><addressOffset>0x28</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>ccvr_req</name><description>Write 1 to request current counter value</description><bitRange>[0:0]</bitRange><access>write-only</access></field><field><name>ccvr_ack</name><description>Acknowledge: 1=counter value valid</description><bitRange>[1:1]</bitRange><access>read-only</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- RTC (Base: 0x57024000) - v100                                 -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>RTC</name>
+      <description>Real-time clock (48-bit free-running counter, v100)</description>
+      <baseAddress>0x57024000</baseAddress>
+      <interrupt><name>RTC_IRQ</name><value>29</value></interrupt>
+      <registers>
+        <register><name>RTC_LOAD_COUNT</name><description>RTC load count register</description><addressOffset>0x00</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>load_count</name><description>Load count value (threshold for interrupt)</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>RTC_CURRENT_VALUE</name><description>RTC current count value</description><addressOffset>0x04</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>current_value</name><description>Current counter value</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>RTC_CONTROL</name><description>RTC control register</description><addressOffset>0x08</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>enable</name><description>RTC enable</description><bitRange>[0:0]</bitRange><access>read-write</access></field><field><name>mode</name><description>Mode: 0=free running; 1=periodic</description><bitRange>[1:1]</bitRange><access>read-write</access></field><field><name>int_mask</name><description>Interrupt mask: 0=unmasked; 1=masked</description><bitRange>[2:2]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>RTC_EOI</name><description>RTC end-of-interrupt (read to clear)</description><addressOffset>0x0C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>eoi</name><description>Read to clear RTC interrupt</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+        <register><name>RTC_INT_STATUS</name><description>RTC interrupt status</description><addressOffset>0x10</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>int_status</name><description>Interrupt status</description><bitRange>[0:0]</bitRange><access>read-only</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+    <!-- ============================================================ -->
+    <!-- EFUSE (Base: 0x44008000) - v151                               -->
+    <!-- ============================================================ -->
+    <peripheral>
+      <name>EFUSE</name>
+      <description>eFuse controller (OTP, v151)</description>
+      <baseAddress>0x44008000</baseAddress>
+      <registers>
+        <register><name>EFUSE_CTL_DATA</name><description>eFuse control data register</description><addressOffset>0x00</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>efuse_ctl</name><description>eFuse control data</description><bitRange>[15:0]</bitRange><access>read-write</access></field><field><name>wr_rd</name><description>Write/Read control: 0=read; 1=write</description><bitRange>[16:16]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>EFUSE_CLK_PERIOD</name><description>eFuse clock period register</description><addressOffset>0x04</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>clk_period</name><description>Clock period value</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>EFUSE_AVDD_CTL</name><description>eFuse AVDD switch register</description><addressOffset>0x0C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>avdd_ctl</name><description>AVDD switch control</description><bitRange>[0:0]</bitRange><access>read-write</access></field></fields></register>
+        <register><name>EFUSE_STS</name><description>eFuse status register (at offset 0x2C)</description><addressOffset>0x2C</addressOffset><resetValue>0x00000000</resetValue><fields><field><name>man_sts</name><description>Manufacturing status</description><bitRange>[1:0]</bitRange><access>read-only</access></field><field><name>boot0_done</name><description>Boot0 done flag</description><bitRange>[2:2]</bitRange><access>read-only</access></field><field><name>boot1_done</name><description>Boot1 done flag</description><bitRange>[3:3]</bitRange><access>read-only</access></field><field><name>boot2_done</name><description>Boot2 done flag</description><bitRange>[4:4]</bitRange><access>read-only</access></field></fields></register>
+      </registers>
+    </peripheral>
+
+  </peripherals>
+</device>
