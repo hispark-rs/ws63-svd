@@ -9747,6 +9747,128 @@
           </fields>
         </register>
         <register>
+          <name>KC_REECPU_LOCK_CMD</name>
+          <description>REE CPU keyslot lock command</description>
+          <addressOffset>0x1B04</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>key_slot_num</name>
+              <description>Key slot number</description>
+              <bitRange>[9:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>flush_hmac_kslot_ind</name>
+              <description>Keyslot type: 0=mcipher; 1=HMAC</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>tscipher_ind</name>
+              <description>TSCipher indicator</description>
+              <bitRange>[16:16]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>lock_cmd</name>
+              <description>Lock command: 1=lock; 0=unlock</description>
+              <bitRange>[20:20]</bitRange>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>KC_PCPU_LOCK_CMD</name>
+          <description>PCPU keyslot lock command</description>
+          <addressOffset>0x1B08</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>key_slot_num</name>
+              <description>Key slot number</description>
+              <bitRange>[9:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>flush_hmac_kslot_ind</name>
+              <description>Keyslot type: 0=mcipher; 1=HMAC</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>tscipher_ind</name>
+              <description>TSCipher indicator</description>
+              <bitRange>[16:16]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>lock_cmd</name>
+              <description>Lock command: 1=lock; 0=unlock</description>
+              <bitRange>[20:20]</bitRange>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>KC_AIDSP_LOCK_CMD</name>
+          <description>AIDSP keyslot lock command</description>
+          <addressOffset>0x1B0C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>key_slot_num</name>
+              <description>Key slot number</description>
+              <bitRange>[9:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>flush_hmac_kslot_ind</name>
+              <description>Keyslot type: 0=mcipher; 1=HMAC</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>tscipher_ind</name>
+              <description>TSCipher indicator</description>
+              <bitRange>[16:16]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>lock_cmd</name>
+              <description>Lock command: 1=lock; 0=unlock</description>
+              <bitRange>[20:20]</bitRange>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>KC_RD_SLOT_NUM</name>
+          <description>Keyslot query slot number selection</description>
+          <addressOffset>0x1B30</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>slot_num_cfg</name>
+              <description>Slot number to query (0-255)</description>
+              <bitRange>[9:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>slot_cfg_type</name>
+              <description>Keyslot type: 0=mcipher; 1=HMAC</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>tscipher_slot_ind</name>
+              <description>TSCipher slot indicator</description>
+              <bitRange>[16:16]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>KC_RD_LOCK_STATUS</name>
           <description>Keyslot lock status readback</description>
           <addressOffset>0x1B34</addressOffset>
