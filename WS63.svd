@@ -7218,73 +7218,127 @@
       <registers>
         <register>
           <name>LSADC_CTRL_0</name>
-          <description>ADC control register 0</description>
+          <description>Scan config (adc_ctrl_data): per-channel enable + sample timing. Set via hal_adc_auto_scan_mode_set.</description>
           <addressOffset>0x00</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>lsadc_ctrl_0</name>
-              <description>ADC control 0 configuration</description>
-              <bitRange>[31:0]</bitRange>
+              <name>channel</name>
+              <description>Per-channel enable bitmask (bit n enables channel n, 0-5)</description>
+              <bitRange>[5:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>equ_model_sel</name>
+              <description>Averaging mode: 0=1x, 1=2x, 2=4x, 3=8x samples</description>
+              <bitRange>[7:6]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>sample_cnt</name>
+              <description>Sample count (5-bit)</description>
+              <bitRange>[12:8]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>start_cnt</name>
+              <description>Start count (8-bit; SDK field name satrt_cnt)</description>
+              <bitRange>[20:13]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>cast_cnt</name>
+              <description>Cast count (7-bit)</description>
+              <bitRange>[27:21]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
         </register>
         <register>
           <name>LSADC_CTRL_1</name>
-          <description>ADC control register 1</description>
+          <description>FIFO status + interrupt waterline (adc_fifo_data)</description>
           <addressOffset>0x04</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>equ_model_sel</name>
-              <description>Equal model select (6-bit)</description>
-              <bitRange>[6:1]</bitRange>
+              <name>rxintsize</name>
+              <description>RX FIFO interrupt waterline (3-bit)</description>
+              <bitRange>[2:0]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>sample_cnt</name>
-              <description>Sample count</description>
-              <bitRange>[11:8]</bitRange>
-              <access>read-write</access>
+              <name>rne</name>
+              <description>RX FIFO not empty</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-only</access>
             </field>
             <field>
-              <name>start_cnt</name>
-              <description>Start count</description>
-              <bitRange>[19:16]</bitRange>
-              <access>read-write</access>
+              <name>rff</name>
+              <description>RX FIFO full</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-only</access>
             </field>
             <field>
-              <name>cast_cnt</name>
-              <description>Cast count</description>
-              <bitRange>[27:24]</bitRange>
-              <access>read-write</access>
+              <name>bsy</name>
+              <description>ADC busy</description>
+              <bitRange>[5:5]</bitRange>
+              <access>read-only</access>
             </field>
           </fields>
         </register>
         <register>
           <name>LSADC_CTRL_2</name>
-          <description>ADC control register 2</description>
+          <description>Interrupt mask/status (adc_irg_data)</description>
           <addressOffset>0x08</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>lsadc_ctrl_2</name>
-              <description>ADC control 2 configuration</description>
-              <bitRange>[31:0]</bitRange>
+              <name>rorim</name>
+              <description>RX overflow interrupt mask</description>
+              <bitRange>[0:0]</bitRange>
               <access>read-write</access>
+            </field>
+            <field>
+              <name>rxim</name>
+              <description>RX FIFO interrupt mask</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>rormis</name>
+              <description>RX overflow masked interrupt status</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>rxmis</name>
+              <description>RX FIFO masked interrupt status</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>rorris</name>
+              <description>RX overflow raw interrupt status</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>rxris</name>
+              <description>RX FIFO raw interrupt status</description>
+              <bitRange>[5:5]</bitRange>
+              <access>read-only</access>
             </field>
           </fields>
         </register>
         <register>
           <name>LSADC_CTRL_3</name>
-          <description>ADC control register 3</description>
+          <description>ADC control register 3 (analog, reserved)</description>
           <addressOffset>0x0C</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>lsadc_ctrl_3</name>
-              <description>ADC control 3 configuration</description>
+              <name>val</name>
+              <description>Raw register value</description>
               <bitRange>[31:0]</bitRange>
               <access>read-write</access>
             </field>
@@ -7292,13 +7346,13 @@
         </register>
         <register>
           <name>LSADC_CTRL_4</name>
-          <description>ADC control register 4</description>
+          <description>ADC control register 4 (analog, reserved)</description>
           <addressOffset>0x10</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>lsadc_ctrl_4</name>
-              <description>ADC control 4 configuration</description>
+              <name>val</name>
+              <description>Raw register value</description>
               <bitRange>[31:0]</bitRange>
               <access>read-write</access>
             </field>
@@ -7306,101 +7360,115 @@
         </register>
         <register>
           <name>LSADC_CTRL_6</name>
-          <description>ADC scan start/stop register</description>
+          <description>ADC control register 6 (analog, reserved)</description>
           <addressOffset>0x14</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>lsadc_start</name>
-              <description>Start ADC scan: 1=start</description>
-              <bitRange>[0:0]</bitRange>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>lsadc_stop</name>
-              <description>Stop ADC scan: 1=stop</description>
-              <bitRange>[1:1]</bitRange>
-              <access>write-only</access>
+              <name>val</name>
+              <description>Raw register value</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-write</access>
             </field>
           </fields>
         </register>
         <register>
           <name>LSADC_CTRL_7</name>
-          <description>ADC enable register</description>
+          <description>ADC control register 7 (analog, reserved)</description>
           <addressOffset>0x18</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>da_lsadc_rstn</name>
-              <description>ADC reset (active low)</description>
-              <bitRange>[0:0]</bitRange>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>da_lsadc_en</name>
-              <description>ADC enable (16-bit, one per channel)</description>
-              <bitRange>[31:16]</bitRange>
+              <name>val</name>
+              <description>Raw register value</description>
+              <bitRange>[31:0]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
         </register>
         <register>
-          <name>LSADC_FIFO_DATA</name>
-          <description>ADC FIFO data register</description>
-          <addressOffset>0x100</addressOffset>
+          <name>LSADC_CTRL_8</name>
+          <description>Scan start/stop (adc_scan_start_and_stop_data)</description>
+          <addressOffset>0x1C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>lsadc_start</name>
+              <description>Write 1 to start a scan</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>lsadc_stop</name>
+              <description>Write 1 to stop a scan</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LSADC_CTRL_9</name>
+          <description>FIFO read data (adc_fifo_read_data): 14-bit code + 3-bit channel</description>
+          <addressOffset>0x20</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>data</name>
-              <description>ADC conversion data (14-bit)</description>
+              <description>14-bit conversion code</description>
               <bitRange>[13:0]</bitRange>
               <access>read-only</access>
             </field>
             <field>
               <name>channel</name>
-              <description>Channel number (3-bit)</description>
+              <description>Source channel (0-5)</description>
               <bitRange>[16:14]</bitRange>
               <access>read-only</access>
             </field>
           </fields>
         </register>
         <register>
-          <name>CFG_CIC_FILTER_EN</name>
-          <description>CIC filter enable register</description>
-          <addressOffset>0x200</addressOffset>
+          <name>LSADC_CTRL_11</name>
+          <description>Analog enable/reset (adc_enable_data)</description>
+          <addressOffset>0x24</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>cic_filter_en</name>
-              <description>CIC filter enable</description>
-              <bitRange>[0:0]</bitRange>
+              <name>da_lsadc_en</name>
+              <description>Analog block enable bits (16-bit; SDK ORs 0x7000/0xE7F/0x100/0x80 during power-up)</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>da_lsadc_rstn</name>
+              <description>Analog reset, active low: 1=release reset</description>
+              <bitRange>[16:16]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
         </register>
         <register>
-          <name>CFG_CIC_OSR</name>
-          <description>CIC oversampling ratio register</description>
-          <addressOffset>0x204</addressOffset>
+          <name>LSADC_CTRL_12</name>
+          <description>ADC control register 12 (analog, reserved)</description>
+          <addressOffset>0x28</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>cic_osr</name>
-              <description>CIC oversampling ratio</description>
-              <bitRange>[7:0]</bitRange>
+              <name>val</name>
+              <description>Raw register value</description>
+              <bitRange>[31:0]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
         </register>
         <register>
           <name>CFG_DATA_SEL</name>
-          <description>Data select register</description>
-          <addressOffset>0x208</addressOffset>
+          <description>Data output select (base+0xDC)</description>
+          <addressOffset>0xDC</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>data_sel</name>
-              <description>Data output select</description>
+              <description>0=raw ADC data, 1=post-processed</description>
               <bitRange>[0:0]</bitRange>
               <access>read-write</access>
             </field>
@@ -7408,8 +7476,8 @@
         </register>
         <register>
           <name>CFG_OFFSET</name>
-          <description>Offset register</description>
-          <addressOffset>0x20C</addressOffset>
+          <description>Offset correction (base+0xE0)</description>
+          <addressOffset>0xE0</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -7422,14 +7490,42 @@
         </register>
         <register>
           <name>CFG_GAIN</name>
-          <description>Gain register</description>
-          <addressOffset>0x210</addressOffset>
+          <description>Gain correction (base+0xE4)</description>
+          <addressOffset>0xE4</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>gain</name>
               <description>ADC gain correction</description>
               <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CFG_CIC_FILTER_EN</name>
+          <description>CIC filter enable (base+0xE8)</description>
+          <addressOffset>0xE8</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>cic_filter_en</name>
+              <description>CIC filter enable</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CFG_CIC_OSR</name>
+          <description>CIC oversampling ratio (base+0xEC)</description>
+          <addressOffset>0xEC</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>cic_osr</name>
+              <description>CIC oversampling ratio</description>
+              <bitRange>[7:0]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
@@ -8304,56 +8400,8 @@
       </addressBlock>
       <registers>
         <register>
-          <name>EFUSE_CTL_DATA</name>
-          <description>eFuse control data register</description>
-          <addressOffset>0x00</addressOffset>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>efuse_ctl</name>
-              <description>eFuse control data</description>
-              <bitRange>[15:0]</bitRange>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>wr_rd</name>
-              <description>Write/Read control: 0=read; 1=write</description>
-              <bitRange>[16:16]</bitRange>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EFUSE_CLK_PERIOD</name>
-          <description>eFuse clock period register</description>
-          <addressOffset>0x04</addressOffset>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>clk_period</name>
-              <description>Clock period value</description>
-              <bitRange>[7:0]</bitRange>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EFUSE_AVDD_CTL</name>
-          <description>eFuse AVDD switch register</description>
-          <addressOffset>0x0C</addressOffset>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>avdd_ctl</name>
-              <description>AVDD switch control</description>
-              <bitRange>[0:0]</bitRange>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>EFUSE_STS</name>
-          <description>eFuse status register (at offset 0x2C)</description>
+          <description>eFuse boot-done status register (base+0x2C). Read-only.</description>
           <addressOffset>0x2C</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
@@ -8380,6 +8428,66 @@
               <description>Boot2 done flag</description>
               <bitRange>[4:4]</bitRange>
               <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EFUSE_CTL_DATA</name>
+          <description>eFuse mode-select register (base+0x30). Write the 16-bit magic to arm an access: 0xA5A5 = program (write) mode, 0x5A5A = read mode.</description>
+          <addressOffset>0x30</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>efuse_wr_rd</name>
+              <description>Mode-select magic word (0xA5A5=write, 0x5A5A=read)</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EFUSE_CLK_PERIOD</name>
+          <description>eFuse clock period register (base+0x34)</description>
+          <addressOffset>0x34</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>clk_period</name>
+              <description>Clock period in cycles (e.g. 0x29 @ 24MHz, 0x19 @ 40MHz)</description>
+              <bitRange>[7:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EFUSE_AVDD_CTL</name>
+          <description>eFuse AVDD program-voltage switch (base+0x3C)</description>
+          <addressOffset>0x3C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>avdd_sw</name>
+              <description>AVDD switch: 1=enable program voltage, 0=disable</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>128</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>EFUSE_DATA[%s]</name>
+          <description>eFuse read/write data window (base+0x800), 128 words covering 256 bytes. Each 32-bit word packs two eFuse bytes: even byte address in [7:0], odd in [15:8]. Word index = byte_addr/2.</description>
+          <addressOffset>0x800</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>data</name>
+              <description>Two packed eFuse bytes (low byte=[7:0], high byte=[15:8])</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
             </field>
           </fields>
         </register>
