@@ -6628,50 +6628,49 @@
         </register>
         <register>
           <name>SPI_WSR</name>
-          <description>Status register</description>
+          <description>Status register. Bit layout matches the HiSilicon SSI v151
+            silicon (vendor hal_spi_v151_regs_def.h spi_wsr_data), NOT the textbook
+            DesignWare SR: the FIFO/busy flags are spread out, not packed in bits
+            0..6. Verified on WS63 silicon 2026-06-14 (idle reads 0x1800 = TXFNF |
+            TXFE).</description>
           <addressOffset>0xE4</addressOffset>
-          <resetValue>0x00000006</resetValue>
+          <resetValue>0x00001800</resetValue>
           <fields>
             <field>
-              <name>busy</name>
-              <description>SPI busy flag</description>
+              <name>dcol</name>
+              <description>Data collision error (master): the last transfer was
+                halted because another master asserted ss_in_n. Cleared on read.</description>
               <bitRange>[0:0]</bitRange>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>txfnf</name>
-              <description>TX FIFO not full</description>
-              <bitRange>[1:1]</bitRange>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>txfe</name>
-              <description>TX FIFO empty</description>
-              <bitRange>[2:2]</bitRange>
               <access>read-only</access>
             </field>
             <field>
               <name>rxfne</name>
               <description>RX FIFO not empty</description>
-              <bitRange>[3:3]</bitRange>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>rxfo</name>
-              <description>RX FIFO overflow</description>
               <bitRange>[4:4]</bitRange>
               <access>read-only</access>
             </field>
             <field>
-              <name>txfo</name>
-              <description>TX FIFO overflow</description>
+              <name>rxff</name>
+              <description>RX FIFO full</description>
               <bitRange>[5:5]</bitRange>
               <access>read-only</access>
             </field>
             <field>
-              <name>dcm</name>
-              <description>Data conflict mask</description>
-              <bitRange>[6:6]</bitRange>
+              <name>txfnf</name>
+              <description>TX FIFO not full</description>
+              <bitRange>[11:11]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>txfe</name>
+              <description>TX FIFO empty</description>
+              <bitRange>[12:12]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>busy</name>
+              <description>SPI busy flag (serial transfer in progress)</description>
+              <bitRange>[15:15]</bitRange>
               <access>read-only</access>
             </field>
           </fields>

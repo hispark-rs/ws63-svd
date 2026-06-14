@@ -16,6 +16,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Fixed LSADC register map to contiguous layout (CTRL_0/1/8/9/11, CFG_* registers)
 
 ### Fixed
+- **SPI_WSR bit layout** corrected to the HiSilicon SSI v151 silicon (vendor
+  `hal_spi_v151_regs_def.h` `spi_wsr_data`), which is NOT the textbook DesignWare
+  SR: `rxfne`=bit4, `rxff`=bit5, `txfnf`=bit11, `txfe`=bit12, `busy`=bit15,
+  `dcol`=bit0 (was the wrong packed `busy`=0/`txfnf`=1/`txfe`=2/`rxfne`=3). The old
+  layout made `txfnf` poll a reserved bit that is always 0, so every SPI transfer
+  timed out. Reset value 0x1800 (TXFNF|TXFE idle). Verified on WS63 silicon
+  2026-06-14: SPI0 MOSI→MISO loopback now round-trips (was `Err(Timeout)`).
 - Added missing KM keyslot registers (KC_REE, PCPU, AIDSP_LOCK_CMD, KC_RD_SLOT_NUM)
 - PWM channels 2–7 now have proper enumeratedValues and field definitions (copy from ch0)
 - CMSIS-SVD schema compliance (CPU name 'custom_riscv' → 'other', license text placement, element ordering)
