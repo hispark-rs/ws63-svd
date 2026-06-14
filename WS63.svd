@@ -8010,24 +8010,24 @@
             </field>
             <field>
               <name>mode</name>
-              <description>Timer mode: 00=free running; 01=one-shot; 10=periodic</description>
+              <description>Timer mode (TIMER_V150, per vendor control_reg_mode_v150_t): 0=one-shot; 1=periodic; 3=free-run (2 is a one-shot alias)</description>
               <bitRange>[2:1]</bitRange>
               <access>read-write</access>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>FreeRunning</name>
-                  <description>Free-running mode</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
                   <name>OneShot</name>
                   <description>One-shot mode</description>
-                  <value>1</value>
+                  <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Periodic</name>
                   <description>Periodic mode</description>
-                  <value>2</value>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>FreeRun</name>
+                  <description>Free-running mode</description>
+                  <value>3</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -8042,6 +8042,18 @@
               <description>Reset FSM: 1=reset timer FSM</description>
               <bitRange>[4:4]</bitRange>
               <access>write-only</access>
+            </field>
+            <field>
+              <name>cnt_req</name>
+              <description>Current-count latch request (TIMER_V150): write 1 to snapshot the live down-counter into the current-value register; the HW asserts cnt_lock when the snapshot is ready. Required to read a fresh count on silicon (the current-value register is a latch, not a live counter).</description>
+              <bitRange>[5:5]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>cnt_lock</name>
+              <description>Current-count latch valid (TIMER_V150): set by HW after a cnt_req snapshot completes; poll until 1 before reading the current-value register.</description>
+              <bitRange>[6:6]</bitRange>
+              <access>read-only</access>
             </field>
           </fields>
         </register>

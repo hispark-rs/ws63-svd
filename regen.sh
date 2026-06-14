@@ -24,7 +24,19 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SVD="$HERE/WS63.svd"
 SETTINGS="$HERE/ws63-settings.yaml"
-PAC_DIR="$(cd "$HERE/../ws63-pac" && pwd)"
+# Locate the ws63-pac crate. Two supported layouts:
+#   * sibling:  .../ws63-pac  and  .../ws63-svd      -> $HERE/../ws63-pac
+#   * nested:   .../ws63-pac/ws63-svd (this svd is a submodule of ws63-pac) -> $HERE/..
+# Pick whichever dir actually holds ws63-pac's Cargo.toml (override with PAC_DIR).
+if [ -z "${PAC_DIR:-}" ]; then
+  if [ -d "$HERE/../ws63-pac" ]; then
+    PAC_DIR="$(cd "$HERE/../ws63-pac" && pwd)"           # sibling layout
+  elif grep -q 'name *= *"ws63-pac"' "$HERE/../Cargo.toml" 2>/dev/null; then
+    PAC_DIR="$(cd "$HERE/.." && pwd)"                    # nested submodule layout
+  else
+    echo "cannot locate the ws63-pac crate from $HERE (set PAC_DIR=...)" >&2; exit 1
+  fi
+fi
 PAC_LIB="${PAC_LIB:-$PAC_DIR/src/lib.rs}"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
