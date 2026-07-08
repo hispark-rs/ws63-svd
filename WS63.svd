@@ -231,6 +231,21 @@
             </field>
           </fields>
         </register>
+        <register>
+          <name>IP_AUTO_CG_BYPASS</name>
+          <displayName>IP_AUTO_CG_BYPASS</displayName>
+          <description>IP auto clock-gate bypass control register. The vendor DMA porting path writes bit 19 so the primary DMA clock stays on during transfers.</description>
+          <addressOffset>0x0244</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>dma_clk_on</name>
+              <description>DMA clock-on bypass bit used by DMA_CLK_AUTO_CTRL_REG/DMA_CLK_ON_MASK in the vendor SDK.</description>
+              <bitRange>[19:19]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -2240,6 +2255,7 @@
           <description>FIFO control register</description>
           <addressOffset>0x24</addressOffset>
           <size>16</size>
+          <access>write-only</access>
           <resetValue>0x0000</resetValue>
           <fields>
             <field>
@@ -8518,6 +8534,7 @@
           <name>RESET_COUNT</name>
           <description>Reset count register</description>
           <addressOffset>0x0008</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -8532,6 +8549,7 @@
           <name>HW_CTL</name>
           <description>Hardware control register</description>
           <addressOffset>0x0014</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -8572,6 +8590,7 @@
           <name>SYS_RST_RECORD_0</name>
           <description>System reset history record 0</description>
           <addressOffset>0x00A0</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -8598,6 +8617,7 @@
           <name>SYS_DIAG_CLR_1</name>
           <description>System diagnostic clear 1</description>
           <addressOffset>0x00A4</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -8605,6 +8625,93 @@
               <description>Write to clear reset history bits</description>
               <bitRange>[31:0]</bitRange>
               <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>CMU</name>
+      <description>Clock management unit registers used by WS63 clock and PLL setup</description>
+      <baseAddress>0x40003000</baseAddress>
+      <addressBlock>
+        <offset>0x0000</offset>
+        <size>0x0500</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>EXCEP_RO_RG</name>
+          <description>Exception read-only status register</description>
+          <addressOffset>0x019C</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>fnpll_lock_grm</name>
+              <description>FNPLL lock status queried by the vendor cmu_is_fnpll_locked path</description>
+              <bitRange>[12:12]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CMU_FNPLL_SIG</name>
+          <description>FNPLL signal and control register</description>
+          <addressOffset>0x042C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>fnpll_pwr_down</name>
+              <description>FNPLL power-down control used by the vendor PM path</description>
+              <bitRange>[14:14]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>fnpll_reset</name>
+              <description>FNPLL reset/control bit used by the vendor PM path</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>fnpll_en</name>
+              <description>FNPLL enable bit used by the vendor PM path</description>
+              <bitRange>[17:17]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CMU_NEW_CFG0</name>
+          <description>CMU divider reset-sync control 0</description>
+          <addressOffset>0x04A0</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>cmu_div_ad_rstn_sync</name>
+              <description>I2S/SIO divider reset-sync release bit used by sio_porting_clock_enable</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CMU_NEW_CFG1</name>
+          <description>CMU flash/CPU divider reset control</description>
+          <addressOffset>0x04A4</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>cpu_div_flash_rstn_sync</name>
+              <description>Flash divider reset-sync bit written before switching flash clock to PLL</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>cpu_div_flash_rstn</name>
+              <description>Flash divider reset release bit written before switching flash clock to PLL</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
             </field>
           </fields>
         </register>
@@ -8672,6 +8779,7 @@
           <name>RESET_STS_CLEAR</name>
           <description>Reset status clear register</description>
           <addressOffset>0x003C</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -10215,6 +10323,18 @@
               <access>read-write</access>
             </field>
             <field>
+              <name>i2s_bus_cken</name>
+              <description>I2S/SIO bus clock gate</description>
+              <bitRange>[11:11]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>i2s_cken</name>
+              <description>I2S/SIO functional clock gate</description>
+              <bitRange>[12:12]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
               <name>gen_cken</name>
               <description>General clock gates: bits [27:18], 10 channels</description>
               <bitRange>[27:18]</bitRange>
@@ -10275,9 +10395,45 @@
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>div_pwm01</name>
-              <description>PWM0/PWM1 clock divider</description>
-              <bitRange>[31:0]</bitRange>
+              <name>spi_div1_cfg</name>
+              <description>SPI divider stage 1 value written by spi_porting_clock_init</description>
+              <bitRange>[4:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>spi_div2_cfg</name>
+              <description>SPI divider stage 2 value written by spi_porting_clock_init</description>
+              <bitRange>[9:5]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>spi_load_div_en</name>
+              <description>SPI divider load enable latch bit</description>
+              <bitRange>[10:10]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm0_div1_cfg</name>
+              <description>PWM0 divider value</description>
+              <bitRange>[19:16]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm0_load_div_en</name>
+              <description>PWM0 divider load enable latch bit</description>
+              <bitRange>[20:20]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm1_div1_cfg</name>
+              <description>PWM1 divider value</description>
+              <bitRange>[29:26]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm1_load_div_en</name>
+              <description>PWM1 divider load enable latch bit</description>
+              <bitRange>[30:30]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
@@ -10289,9 +10445,39 @@
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>div_pwm234</name>
-              <description>PWM2/PWM3/PWM4 clock divider</description>
-              <bitRange>[31:0]</bitRange>
+              <name>pwm2_div1_cfg</name>
+              <description>PWM2 divider value</description>
+              <bitRange>[7:4]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm2_load_div_en</name>
+              <description>PWM2 divider load enable latch bit</description>
+              <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm3_div1_cfg</name>
+              <description>PWM3 divider value</description>
+              <bitRange>[17:14]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm3_load_div_en</name>
+              <description>PWM3 divider load enable latch bit</description>
+              <bitRange>[18:18]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm4_div1_cfg</name>
+              <description>PWM4 divider value</description>
+              <bitRange>[27:24]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm4_load_div_en</name>
+              <description>PWM4 divider load enable latch bit</description>
+              <bitRange>[28:28]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
@@ -10303,9 +10489,39 @@
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>div_pwm567</name>
-              <description>PWM5/PWM6/PWM7 clock divider</description>
-              <bitRange>[31:0]</bitRange>
+              <name>pwm5_div1_cfg</name>
+              <description>PWM5 divider value</description>
+              <bitRange>[7:4]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm5_load_div_en</name>
+              <description>PWM5 divider load enable latch bit</description>
+              <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm6_div1_cfg</name>
+              <description>PWM6 divider value</description>
+              <bitRange>[17:14]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm6_load_div_en</name>
+              <description>PWM6 divider load enable latch bit</description>
+              <bitRange>[18:18]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm7_div1_cfg</name>
+              <description>PWM7 divider value</description>
+              <bitRange>[27:24]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm7_load_div_en</name>
+              <description>PWM7 divider load enable latch bit</description>
+              <bitRange>[28:28]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
@@ -10540,6 +10756,20 @@
               <name>soft_rst_wcpu_mem_ctl_n</name>
               <description>WCPU memory controller reset: 0=reset; 1=released</description>
               <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2S_DIV_CFG</name>
+          <description>I2S/SIO MCLK divider configuration</description>
+          <addressOffset>0x44</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>i2s_mclk_div_num</name>
+              <description>I2S MCLK divider number written by sio_porting_set_sample_rate</description>
+              <bitRange>[31:0]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
