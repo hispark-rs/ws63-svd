@@ -10,7 +10,7 @@
 #   1. svd2rust 0.37.1   WS63.svd --target riscv --settings ws63-settings.yaml
 #   2. rustfmt           format the raw (unformatted) svd2rust output
 #   3. postprocess.py    strip 5 dup TIMER accessors + #[no_mangle] -> #[unsafe(..)]
-#   4. cargo fix         unsafe_op_in_unsafe_fn wraps (edition 2024, needs the crate)
+#   4. install           copy deterministic postprocessed output into the PAC
 #   5. cargo fmt
 #   6. build + clippy gate (rt + critical-section features)
 #
@@ -61,19 +61,16 @@ rustfmt --edition 2024 "$WORK/lib.rs"
 echo "── 3. postprocess (deterministic text fixups) ───────────"
 python3 "$HERE/postprocess.py" "$WORK/lib.rs"
 
-echo "── 4. install + cargo fix (unsafe_op_in_unsafe_fn) ──────"
+echo "── 4. install deterministic output ─────────────────"
 cp "$WORK/lib.rs" "$PAC_LIB"
-( cd "$PAC_DIR" && cargo fix --lib -p ws63-pac \
-    --features critical-section,rt \
-    --allow-dirty --allow-no-vcs --broken-code >/dev/null 2>&1 )
 
 echo "── 5. cargo fmt ─────────────────────────────────────────"
 ( cd "$PAC_DIR" && cargo fmt -p ws63-pac )
 
 echo "── 6. verify (build + clippy, rt+critical-section) ──────"
-( cd "$PAC_DIR" && cargo build -p ws63-pac --release --features critical-section,rt >/dev/null 2>&1 ) \
+( cd "$PAC_DIR" && cargo build -Zbuild-std=core -p ws63-pac --release --features critical-section,rt >/dev/null 2>&1 ) \
     && echo "  build OK" || { echo "  BUILD FAILED" >&2; exit 1; }
-( cd "$PAC_DIR" && cargo clippy -p ws63-pac --features critical-section,rt -- -D warnings >/dev/null 2>&1 ) \
+( cd "$PAC_DIR" && cargo clippy -Zbuild-std=core -p ws63-pac --features critical-section,rt -- -D warnings >/dev/null 2>&1 ) \
     && echo "  clippy OK" || { echo "  CLIPPY FAILED" >&2; exit 1; }
 
 echo "── done: $PAC_LIB regenerated ───────────────────────────"

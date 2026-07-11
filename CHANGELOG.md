@@ -7,10 +7,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 ### Added
+- Shared-RAM ownership fields for `CFG_RAM_CKEN` / `CFG_RAM_SEL` and the missing
+  `BT_EM_CTL.EM_GT_MODE` register used by the official `dyn_mem_cfg` sequence.
 - cfg-gating of interrupt module's RISC-V coupling for host builds (allows ws63-pac and ws63-hal to compile for x86 targets in test scenarios)
 - ARCHITECTURE.md documenting the SVD source and reproducible PAC generation pipeline
 
 ### Changed
+- Move the Edition 2024 `Peripherals::steal` unsafe-body fix into deterministic
+  postprocessing instead of relying on `cargo fix` during regeneration.
 - Reproducible svd2rust 0.37.1 PAC generation pipeline (regen.sh + postprocess.py deterministic transforms)
 - Fixed eFuse register map to match WS63 C SDK (control block at base+0x30, 16-bit mode-select magic field, 0x800 data window)
 - Fixed LSADC register map to contiguous layout (CTRL_0/1/8/9/11, CFG_* registers)
