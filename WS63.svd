@@ -8641,6 +8641,104 @@
       </addressBlock>
       <registers>
         <register>
+          <name>RF_RX_LDO</name>
+          <description>RF receiver 1.0 V LDO control used by the application-owned RF power-up sequence</description>
+          <addressOffset>0x0134</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>Complete vendor-defined RF RX LDO control value</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RF_LNA_LDO</name>
+          <description>RF low-noise amplifier 1.0 V LDO control</description>
+          <addressOffset>0x0138</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>Complete vendor-defined RF LNA LDO control value</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RF_VCO_LDO</name>
+          <description>RF voltage-controlled oscillator 1.0 V LDO control</description>
+          <addressOffset>0x0140</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>Complete vendor-defined RF VCO LDO control value</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RF_ABB_LDO</name>
+          <description>RF analog-baseband 1.0 V LDO control</description>
+          <addressOffset>0x0144</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>Complete vendor-defined RF analog-baseband LDO control value</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RF_PLL_LDO</name>
+          <description>RF phase-locked-loop 1.0 V LDO control</description>
+          <addressOffset>0x0148</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>Complete vendor-defined RF PLL LDO control value</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RF_TX_LDO</name>
+          <description>RF transmitter 1.8 V LDO control</description>
+          <addressOffset>0x0168</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>Complete vendor-defined RF TX LDO control value</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RF_ADDA_ISO</name>
+          <description>RF ADC/DAC isolation release control</description>
+          <addressOffset>0x0230</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>RF ADC/DAC isolation control value</description>
+              <bitRange>[1:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>EXCEP_RO_RG</name>
           <description>Exception read-only status register</description>
           <addressOffset>0x019C</addressOffset>
@@ -8652,6 +8750,34 @@
               <description>FNPLL lock status queried by the vendor cmu_is_fnpll_locked path</description>
               <bitRange>[12:12]</bitRange>
               <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RF_PLL_REFERENCE</name>
+          <description>RF PLL reference-clock enable control</description>
+          <addressOffset>0x0400</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>Complete vendor-defined RF PLL reference control value</description>
+              <bitRange>[2:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>XO_SIGNAL</name>
+          <description>Crystal-oscillator trim and signal control</description>
+          <addressOffset>0x0404</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>control</name>
+              <description>Complete vendor-defined XO trim/control value</description>
+              <bitRange>[19:0]</bitRange>
+              <access>read-write</access>
             </field>
           </fields>
         </register>
