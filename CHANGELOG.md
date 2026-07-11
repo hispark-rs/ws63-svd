@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+- Model the WS63 RISC-V mask-ROM instruction patch controller at
+  `0xE000_0000`, including its 192 instruction comparison registers.
+
 ### Added
 - Shared-RAM ownership fields for `CFG_RAM_CKEN` / `CFG_RAM_SEL` and the missing
   `BT_EM_CTL.EM_GT_MODE` register used by the official `dyn_mem_cfg` sequence.

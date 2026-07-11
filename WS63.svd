@@ -11330,5 +11330,81 @@
         </register>
       </registers>
     </peripheral>
+    <peripheral>
+      <name>RISCV_PATCH</name>
+      <description>RISC-V instruction patch controller used to redirect mask-ROM entry points to application-provided fixes</description>
+      <baseAddress>0xE0000000</baseAddress>
+      <addressBlock>
+        <offset>0x0000</offset>
+        <size>0x0310</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>FLPCTRL</name>
+          <description>Instruction patch controller configuration</description>
+          <addressOffset>0x000</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>enable</name>
+              <description>Enable instruction patch matching</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>write_protect</name>
+              <description>Protect the comparison registers from writes</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>outside_1m</name>
+              <description>Select long-jump remap entries whose destinations may be outside the source 1 MiB region</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>load_compare0_enable</name>
+              <description>Enable load-address comparison register 0</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>load_compare1_enable</name>
+              <description>Enable load-address comparison register 1</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FLPRMP</name>
+          <description>Base address of the instruction remap table</description>
+          <addressOffset>0x004</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>FLPLACMP0</name>
+          <description>Optional load-address comparison register 0</description>
+          <addressOffset>0x008</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>FLPLACMP1</name>
+          <description>Optional load-address comparison register 1</description>
+          <addressOffset>0x00C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <dim>192</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>FLPIACMP[%s]</name>
+          <description>Instruction-address comparison register %s; bit 0 enables the entry and bits 31:1 hold the halfword-aligned mask-ROM address</description>
+          <addressOffset>0x010</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+      </registers>
+    </peripheral>
   </peripherals>
 </device>
