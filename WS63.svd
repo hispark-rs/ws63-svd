@@ -7952,13 +7952,14 @@
           <name>EOI_REN</name>
           <description>End-of-interrupt register</description>
           <addressOffset>0x78</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>eoi</name>
-              <description>Clear interrupts for all timers (read to clear)</description>
+              <description>Clear interrupts for all timers by writing one bit per channel; reads return zero and do not clear on WS63 silicon</description>
               <bitRange>[2:0]</bitRange>
-              <access>read-only</access>
+              <access>write-only</access>
             </field>
           </fields>
         </register>
@@ -8099,13 +8100,14 @@
           <name>TIMER%s_EOI</name>
           <description>Timer %s [dim=3] end-of-interrupt</description>
           <addressOffset>0x114</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>eoi</name>
-              <description>Read to clear timer 0 interrupt</description>
+              <description>Write 1 to clear this timer interrupt; reads return zero and do not clear on WS63 silicon</description>
               <bitRange>[0:0]</bitRange>
-              <access>read-only</access>
+              <access>write-only</access>
             </field>
           </fields>
         </register>
