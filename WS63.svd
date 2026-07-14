@@ -64,6 +64,22 @@
         <value>40</value>
       </interrupt>
       <interrupt>
+        <name>SOFT_INT3</name>
+        <value>39</value>
+      </interrupt>
+      <interrupt>
+        <name>SOFT_INT2</name>
+        <value>38</value>
+      </interrupt>
+      <interrupt>
+        <name>SOFT_INT1</name>
+        <value>37</value>
+      </interrupt>
+      <interrupt>
+        <name>SOFT_INT0</name>
+        <value>36</value>
+      </interrupt>
+      <interrupt>
         <name>TIMER_INT2</name>
         <value>28</value>
       </interrupt>
@@ -137,6 +153,7 @@
           <displayName>SOFT_INT_SET</displayName>
           <description>CPU soft interrupt set register (self-clearing)</description>
           <addressOffset>0x0154</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -170,6 +187,7 @@
           <displayName>SOFT_INT_CLR</displayName>
           <description>CPU soft interrupt clear register (self-clearing)</description>
           <addressOffset>0x0158</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -203,6 +221,7 @@
           <displayName>SOFT_INT_STS</displayName>
           <description>CPU soft interrupt status register</description>
           <addressOffset>0x015C</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
