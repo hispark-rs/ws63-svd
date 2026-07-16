@@ -9063,13 +9063,31 @@
           <name>SPACC_INT_RAW_SYM_CLR_FINISH</name>
           <description>Sym clear finish raw interrupt</description>
           <addressOffset>0x0008</addressOffset>
+          <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>raw_sym_clr_finish_int</name>
-              <description>Raw interrupt for sym clear finish</description>
+              <description>Raw interrupt for sym clear finish; write one to clear</description>
               <bitRange>[15:0]</bitRange>
-              <access>read-only</access>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SPACC_INT_RAW_HASH_CLEAR_FINISH</name>
+          <description>Hash channel-clear completion status; write one to clear</description>
+          <addressOffset>0x0014</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>raw_hash_clear_finish</name>
+              <description>Hash channel-clear completion bits</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
             </field>
           </fields>
         </register>
@@ -9105,6 +9123,7 @@
           <name>SPACC_SYM_CHN_CLEAR_REQ</name>
           <description>Sym channel clear request</description>
           <addressOffset>0x0060</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -9119,6 +9138,7 @@
           <name>SPACC_HASH_CHN_CLEAR_REQ</name>
           <description>Hash channel clear request</description>
           <addressOffset>0x0068</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -9133,6 +9153,7 @@
           <name>SPACC_BUS_ERR</name>
           <description>Bus error register</description>
           <addressOffset>0x0200</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
@@ -9140,6 +9161,272 @@
               <description>Bus error status</description>
               <bitRange>[31:0]</bitRange>
               <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_HASH_CHN1_CTRL</dimName>
+          <name>IN_HASH_CHN%s_CTRL</name>
+          <description>Hash channel %s control</description>
+          <addressOffset>0x5100</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>hash_chn_ss</name>
+              <description>Security-source selector; 0xA selects non-secure REE</description>
+              <bitRange>[11:8]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>hash_chn_en</name>
+              <description>Enable the hash channel</description>
+              <bitRange>[31:31]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_HASH_CHN1_KEY_CTRL</dimName>
+          <name>IN_HASH_CHN%s_KEY_CTRL</name>
+          <description>Hash channel %s algorithm and keyslot control</description>
+          <addressOffset>0x5110</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>hash_key_chn_id</name>
+              <description>HMAC keyslot channel ID</description>
+              <bitRange>[3:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>hmac_vld</name>
+              <description>Use the selected HMAC keyslot</description>
+              <bitRange>[9:9]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>hash_chn_alg_sel</name>
+              <description>Hash family: 0xA=SHA-1; 0xB=SHA-2; 0xC=SM3</description>
+              <bitRange>[19:16]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>hash_chn_alg_mode</name>
+              <description>SHA-2 mode: 0=224; 1=256; 2=384; 3=512</description>
+              <bitRange>[23:20]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_HASH_CHN1_NODE_START_ADDR_H</dimName>
+          <name>IN_HASH_CHN%s_NODE_START_ADDR_H</name>
+          <description>Hash channel %s descriptor-list address bits 35:32</description>
+          <addressOffset>0x5120</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>address_high</name>
+              <description>Descriptor-list address bits 35:32</description>
+              <bitRange>[3:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_HASH_CHN1_NODE_START_ADDR_L</dimName>
+          <name>IN_HASH_CHN%s_NODE_START_ADDR_L</name>
+          <description>Hash channel %s descriptor-list address bits 31:0</description>
+          <addressOffset>0x5124</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>address_low</name>
+              <description>Descriptor-list address bits 31:0</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_HASH_CHN1_NODE_LENGTH</dimName>
+          <name>IN_HASH_CHN%s_NODE_LENGTH</name>
+          <description>Hash channel %s descriptor ring depth</description>
+          <addressOffset>0x512C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>node_length</name>
+              <description>Number of descriptors in the ring</description>
+              <bitRange>[7:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_HASH_CHN1_NODE_WR_POINT</dimName>
+          <name>IN_HASH_CHN%s_NODE_WR_POINT</name>
+          <description>Hash channel %s descriptor write pointer</description>
+          <addressOffset>0x5130</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>write_pointer</name>
+              <description>Descriptor producer index</description>
+              <bitRange>[7:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_HASH_CHN1_NODE_RD_POINT</dimName>
+          <name>IN_HASH_CHN%s_NODE_RD_POINT</name>
+          <description>Hash channel %s descriptor read pointer</description>
+          <addressOffset>0x5134</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>read_pointer</name>
+              <description>Descriptor consumer index</description>
+              <bitRange>[7:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_HASH_CHN1_DATA_LEN</dimName>
+          <name>IN_HASH_CHN%s_DATA_LEN</name>
+          <description>Hash channel %s unprocessed byte count</description>
+          <addressOffset>0x51C0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>data_len</name>
+              <description>Bytes not yet consumed by the engine</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>REE_HASH_CALC_CTRL_CHECK_ERR</name>
+          <description>REE hash-control validation error summary</description>
+          <addressOffset>0x8078</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>error</name>
+              <description>Non-zero when hash channel control validation failed</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>REE_HASH_CALC_CTRL_CHECK_ERR_STATUS</name>
+          <description>REE hash-control validation error detail</description>
+          <addressOffset>0x807C</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>status</name>
+              <description>Hash-control validation error detail</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>HASH_CHANN_RAW_INT</name>
+          <description>Hash channel completion status; write one to clear</description>
+          <addressOffset>0x8600</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>hash_chann_raw_int</name>
+              <description>Completion bits for hash channels 0 through 15</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>HASH_CHANN_RAW_INT_EN</name>
+          <description>Hash channel completion interrupt enable</description>
+          <addressOffset>0x8604</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>hash_chann_raw_int_en</name>
+              <description>Interrupt-enable bits for hash channels 0 through 15</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x80</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>CHANN1_HASH_STATE_VAL</dimName>
+          <name>CHANN%s_HASH_STATE_VAL</name>
+          <description>Hash channel %s indexed state data</description>
+          <addressOffset>0xA080</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>state</name>
+              <description>State word selected by the state address register</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x80</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>CHANN1_HASH_STATE_VAL_ADDR</dimName>
+          <name>CHANN%s_HASH_STATE_VAL_ADDR</name>
+          <description>Hash channel %s state-word selector</description>
+          <addressOffset>0xA084</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>index</name>
+              <description>State word index</description>
+              <bitRange>[4:0]</bitRange>
+              <access>read-write</access>
             </field>
           </fields>
         </register>
