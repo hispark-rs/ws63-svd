@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   `0xE000_0000`, including its 192 instruction comparison registers.
 
 ### Added
+- SPACC symmetric channel 1/2 input/output descriptor rings, completion/error
+  status, and the KM/KLAD clear-key and MCipher keyslot registers used by AES.
 - Shared-RAM ownership fields for `CFG_RAM_CKEN` / `CFG_RAM_SEL` and the missing
   `BT_EM_CTL.EM_GT_MODE` register used by the official `dyn_mem_cfg` sequence.
 - cfg-gating of interrupt module's RISC-V coupling for host builds (allows ws63-pac and ws63-hal to compile for x86 targets in test scenarios)
@@ -23,6 +25,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Fixed LSADC register map to contiguous layout (CTRL_0/1/8/9/11, CFG_* registers)
 
 ### Fixed
+- Correct AES key-length encoding to `1/2/3` for 128/192/256 bits and model
+  symmetric/KLAD completion registers as write-one-to-clear.
 - **SPI_WSR bit layout** corrected to the HiSilicon SSI v151 silicon (vendor
   `hal_spi_v151_regs_def.h` `spi_wsr_data`), which is NOT the textbook DesignWare
   SR: `rxfne`=bit4, `rxff`=bit5, `txfnf`=bit11, `txfe`=bit12, `busy`=bit15,

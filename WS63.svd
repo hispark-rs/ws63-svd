@@ -9431,6 +9431,105 @@
           </fields>
         </register>
         <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_SYM_CHN1_CTRL</dimName>
+          <name>IN_SYM_CHN%s_CTRL</name>
+          <description>Symmetric channel %s control</description>
+          <addressOffset>0x4100</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>sym_chn_ss</name>
+              <description>Source security selector; 0xA selects non-secure REE</description>
+              <bitRange>[11:8]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>sym_chn_ds</name>
+              <description>Destination security selector; 0xA selects non-secure REE</description>
+              <bitRange>[15:12]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>sym_chn_en</name>
+              <description>Enable the symmetric channel</description>
+              <bitRange>[31:31]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_SYM_OUT_CTRL1</dimName>
+          <name>IN_SYM_OUT_CTRL%s</name>
+          <description>Symmetric channel %s output control</description>
+          <addressOffset>0x4104</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>dma_copy</name>
+              <description>Enable DMA copy mode</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim>
+          <dimIncrement>0x100</dimIncrement>
+          <dimIndex>1,2</dimIndex>
+          <dimName>IN_SYM_CHN1_KEY_CTRL</dimName>
+          <name>IN_SYM_CHN%s_KEY_CTRL</name>
+          <description>Symmetric channel %s algorithm and keyslot control</description>
+          <addressOffset>0x4110</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>key_chn_id</name><description>MCipher keyslot ID</description><bitRange>[8:0]</bitRange><access>read-write</access></field>
+            <field><name>alg_sel</name><description>Algorithm: 2=AES; 5=SM4</description><bitRange>[19:16]</bitRange><access>read-write</access></field>
+            <field><name>alg_mode</name><description>Mode: 1=ECB; 3=CBC; 6=CTR; 0xC=CMAC</description><bitRange>[23:20]</bitRange><access>read-write</access></field>
+            <field><name>key_len</name><description>Key length: 1=128bit; 2=192bit; 3=256bit</description><bitRange>[25:24]</bitRange><access>read-write</access></field>
+            <field><name>data_width</name><description>Data width: 0=128bit; 1=64bit; 2=32bit</description><bitRange>[27:26]</bitRange><access>read-write</access></field>
+            <field><name>decrypt</name><description>Decrypt when set</description><bitRange>[28:28]</bitRange><access>read-write</access></field>
+          </fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>IN_SYM_CHN1_NODE_START_ADDR_H</dimName>
+          <name>IN_SYM_CHN%s_NODE_START_ADDR_H</name><description>Symmetric input descriptor-list address bits 35:32</description><addressOffset>0x4120</addressOffset><resetValue>0x00000000</resetValue>
+          <fields><field><name>address_high</name><description>Address bits 35:32</description><bitRange>[3:0]</bitRange><access>read-write</access></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>IN_SYM_CHN1_NODE_START_ADDR_L</dimName>
+          <name>IN_SYM_CHN%s_NODE_START_ADDR_L</name><description>Symmetric input descriptor-list address bits 31:0</description><addressOffset>0x4124</addressOffset><resetValue>0x00000000</resetValue>
+          <fields><field><name>address_low</name><description>Address bits 31:0</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>IN_SYM_CHN1_NODE_LENGTH</dimName>
+          <name>IN_SYM_CHN%s_NODE_LENGTH</name><description>Symmetric input descriptor ring depth</description><addressOffset>0x412C</addressOffset><resetValue>0x00000000</resetValue>
+          <fields><field><name>node_length</name><description>Descriptor count</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>IN_SYM_CHN1_NODE_WR_POINT</dimName>
+          <name>IN_SYM_CHN%s_NODE_WR_POINT</name><description>Symmetric input descriptor producer pointer</description><addressOffset>0x4130</addressOffset><resetValue>0x00000000</resetValue>
+          <fields><field><name>write_pointer</name><description>Producer index</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>IN_SYM_CHN1_NODE_RD_POINT</dimName>
+          <name>IN_SYM_CHN%s_NODE_RD_POINT</name><description>Symmetric input descriptor consumer pointer</description><addressOffset>0x4134</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields><field><name>read_pointer</name><description>Consumer index</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields>
+        </register>
+        <register>
+          <name>REE_SYM_CALC_CTRL_CHECK_ERR</name><description>REE symmetric-control validation error summary</description><addressOffset>0x8070</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields><field><name>error</name><description>Non-zero when symmetric channel validation failed</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields>
+        </register>
+        <register>
+          <name>REE_SYM_CALC_CTRL_CHECK_ERR_STATUS</name><description>REE symmetric-control validation error detail</description><addressOffset>0x8074</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields><field><name>status</name><description>Validation error detail</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields>
+        </register>
+        <register>
           <name>IN_SYM_CHN0_CTRL</name>
           <description>Sym channel 0 control register (no-DMA mode)</description>
           <addressOffset>0x4000</addressOffset>
@@ -9544,24 +9643,24 @@
             </field>
             <field>
               <name>key_len</name>
-              <description>Key length: 0=128bit; 1=192bit; 2=256bit</description>
+              <description>Key length: 1=128bit; 2=192bit; 3=256bit</description>
               <bitRange>[25:24]</bitRange>
               <access>read-write</access>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Key128</name>
                   <description>128-bit key</description>
-                  <value>0</value>
+                  <value>1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Key192</name>
                   <description>192-bit key</description>
-                  <value>1</value>
+                  <value>2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Key256</name>
                   <description>256-bit key</description>
-                  <value>2</value>
+                  <value>3</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -9708,17 +9807,48 @@
         </register>
         <register>
           <name>SYM_CHANN_RAW_INT</name>
-          <description>Sym channel raw interrupt status</description>
+          <description>Sym channel raw interrupt status; write one to clear</description>
           <addressOffset>0x8610</addressOffset>
+          <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>sym_chann_raw_int</name>
               <description>Raw interrupt per channel [15:0]</description>
               <bitRange>[15:0]</bitRange>
-              <access>read-only</access>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
             </field>
           </fields>
+        </register>
+        <register>
+          <name>OUT_SYM_CHAN_RAW_LAST_NODE_INT</name><description>Output last-node completion status; write one to clear</description><addressOffset>0xC000</addressOffset><access>read-write</access><resetValue>0x00000000</resetValue>
+          <fields><field><name>out_sym_chan_raw_int</name><description>Completion bits for symmetric channels</description><bitRange>[15:0]</bitRange><access>read-write</access><modifiedWriteValues>oneToClear</modifiedWriteValues></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>OUT_SYM_CHN1_NODE_START_ADDR_H</dimName>
+          <name>OUT_SYM_CHN%s_NODE_START_ADDR_H</name><description>Symmetric output descriptor-list address bits 35:32</description><addressOffset>0xD020</addressOffset><resetValue>0x00000000</resetValue>
+          <fields><field><name>address_high</name><description>Address bits 35:32</description><bitRange>[3:0]</bitRange><access>read-write</access></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>OUT_SYM_CHN1_NODE_START_ADDR_L</dimName>
+          <name>OUT_SYM_CHN%s_NODE_START_ADDR_L</name><description>Symmetric output descriptor-list address bits 31:0</description><addressOffset>0xD024</addressOffset><resetValue>0x00000000</resetValue>
+          <fields><field><name>address_low</name><description>Address bits 31:0</description><bitRange>[31:0]</bitRange><access>read-write</access></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>OUT_SYM_CHN1_NODE_LENGTH</dimName>
+          <name>OUT_SYM_CHN%s_NODE_LENGTH</name><description>Symmetric output descriptor ring depth</description><addressOffset>0xD028</addressOffset><resetValue>0x00000000</resetValue>
+          <fields><field><name>node_length</name><description>Descriptor count</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>OUT_SYM_CHN1_NODE_WR_POINT</dimName>
+          <name>OUT_SYM_CHN%s_NODE_WR_POINT</name><description>Symmetric output descriptor producer pointer</description><addressOffset>0xD030</addressOffset><resetValue>0x00000000</resetValue>
+          <fields><field><name>write_pointer</name><description>Producer index</description><bitRange>[7:0]</bitRange><access>read-write</access></field></fields>
+        </register>
+        <register>
+          <dim>2</dim><dimIncrement>0x100</dimIncrement><dimIndex>1,2</dimIndex><dimName>OUT_SYM_CHN1_NODE_RD_POINT</dimName>
+          <name>OUT_SYM_CHN%s_NODE_RD_POINT</name><description>Symmetric output descriptor consumer pointer</description><addressOffset>0xD034</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields><field><name>read_pointer</name><description>Consumer index</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields>
         </register>
       </registers>
     </peripheral>
@@ -10276,13 +10406,14 @@
           <name>KL_DATA_IN_0</name>
           <description>Key data input word 0</description>
           <addressOffset>0x1000</addressOffset>
+          <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>data</name>
               <description>Key data[31:0]</description>
               <bitRange>[31:0]</bitRange>
-              <access>read-write</access>
+              <access>write-only</access>
             </field>
           </fields>
         </register>
@@ -10296,7 +10427,7 @@
               <name>data</name>
               <description>Key data[63:32]</description>
               <bitRange>[31:0]</bitRange>
-              <access>read-write</access>
+              <access>write-only</access>
             </field>
           </fields>
         </register>
@@ -10310,7 +10441,7 @@
               <name>data</name>
               <description>Key data[95:64]</description>
               <bitRange>[31:0]</bitRange>
-              <access>read-write</access>
+              <access>write-only</access>
             </field>
           </fields>
         </register>
@@ -10324,7 +10455,7 @@
               <name>data</name>
               <description>Key data[127:96]</description>
               <bitRange>[31:0]</bitRange>
-              <access>read-write</access>
+              <access>write-only</access>
             </field>
           </fields>
         </register>
@@ -10453,6 +10584,10 @@
           </fields>
         </register>
         <register>
+          <name>KC_ERROR</name><description>Key controller error register</description><addressOffset>0x103C</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields><field><name>error</name><description>Key controller error code</description><bitRange>[31:0]</bitRange><access>read-only</access></field></fields>
+        </register>
+        <register>
           <name>KL_INT_EN</name>
           <description>KLAD interrupt enable</description>
           <addressOffset>0x1040</addressOffset>
@@ -10478,6 +10613,13 @@
               <bitRange>[0:0]</bitRange>
               <access>read-only</access>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>KL_INT_RAW</name><description>KLAD raw interrupt status; write one to clear</description><addressOffset>0x1044</addressOffset><access>read-write</access><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>kl_int_raw</name><description>Common KLAD completion; write one to clear</description><bitRange>[0:0]</bitRange><access>read-write</access><modifiedWriteValues>oneToClear</modifiedWriteValues></field>
+            <field><name>clr_kl_int_raw</name><description>Clear-key route completion; write one to clear</description><bitRange>[14:14]</bitRange><access>read-write</access><modifiedWriteValues>oneToClear</modifiedWriteValues></field>
           </fields>
         </register>
         <register>
@@ -10559,6 +10701,27 @@
           </fields>
         </register>
         <register>
+          <name>KL_UNLOCK_CTRL</name><description>KLAD unlock control</description><addressOffset>0x1078</addressOffset><access>write-only</access><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>kl_unlock</name><description>Unlock request</description><bitRange>[0:0]</bitRange><access>write-only</access></field>
+            <field><name>kl_unlock_num</name><description>Unlock sequence number</description><bitRange>[6:4]</bitRange><access>write-only</access></field>
+            <field><name>kl_com_unlock_num</name><description>Common unlock sequence number</description><bitRange>[10:8]</bitRange><access>write-only</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>KL_COM_LOCK_INFO</name><description>KLAD common lock result</description><addressOffset>0x107C</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>lock_busy</name><description>Lock operation busy state</description><bitRange>[1:0]</bitRange><access>read-only</access></field>
+            <field><name>lock_fail</name><description>Lock failure state</description><bitRange>[3:2]</bitRange><access>read-only</access></field>
+            <field><name>unlock_fail</name><description>Unlock failure state</description><bitRange>[5:4]</bitRange><access>read-only</access></field>
+            <field><name>lock_num</name><description>Current lock sequence number</description><bitRange>[10:8]</bitRange><access>read-only</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>KL_COM_LOCK_STATUS</name><description>KLAD common lock owner status</description><addressOffset>0x1080</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields><field><name>lock_status</name><description>0xAA means locked by the caller</description><bitRange>[7:0]</bitRange><access>read-only</access></field></fields>
+        </register>
+        <register>
           <name>KL_ALARM_INFO</name>
           <description>KLAD alarm info register</description>
           <addressOffset>0x1600</addressOffset>
@@ -10576,6 +10739,14 @@
               <bitRange>[1:1]</bitRange>
               <access>read-only</access>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>KL_CLR_CTRL</name><description>KLAD clear-key route control</description><addressOffset>0x1438</addressOffset><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>start</name><description>Start clear-key route; hardware clears on completion</description><bitRange>[0:0]</bitRange><access>read-write</access></field>
+            <field><name>key_size</name><description>Key size: 1=128bit; 2=192bit; 3=256bit</description><bitRange>[3:2]</bitRange><access>read-write</access></field>
+            <field><name>key_count</name><description>Software HMAC key block index</description><bitRange>[15:13]</bitRange><access>read-write</access></field>
           </fields>
         </register>
         <register>
@@ -10628,6 +10799,14 @@
               <bitRange>[20:20]</bitRange>
               <access>write-only</access>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>KC_REECPU_FLUSH_BUSY</name><description>REE keyslot flush status</description><addressOffset>0x1B14</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>flush_busy</name><description>Keyslot flush is in progress</description><bitRange>[0:0]</bitRange><access>read-only</access></field>
+            <field><name>unlock_fail</name><description>Last keyslot unlock failed</description><bitRange>[1:1]</bitRange><access>read-only</access></field>
+            <field><name>timeout_error</name><description>Last keyslot flush timed out</description><bitRange>[2:2]</bitRange><access>read-only</access></field>
           </fields>
         </register>
         <register>

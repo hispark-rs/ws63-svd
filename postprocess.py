@@ -13,8 +13,8 @@ Fixups applied here (both deterministic, order-independent):
      `foo(&self)` that just forwards to `foo(0)`. When the bare name collides
      with the indexed one this is a duplicate-definition *compile error*. The
      HAL uses the indexed form (`r.timer0_control(0)`), so the bare forwarder
-     is removed. Exactly 15 such blocks exist: five TIMER arrays (load_count /
-     current_value / control / eoi / raw_intr) and ten SPACC hash-channel/state
+     is removed. Exactly 28 such blocks exist: five TIMER arrays, ten SPACC
+     hash-channel/state arrays, and thirteen SPACC symmetric input/output ring
      arrays. The count is asserted below.
 
   2. `#[no_mangle]` -> `#[unsafe(no_mangle)]`.
@@ -39,7 +39,7 @@ Usage: postprocess.py <lib.rs>   (edits in place)
 import re
 import sys
 
-EXPECTED_BARE_STRIPS = 15
+EXPECTED_BARE_STRIPS = 28
 EXPECTED_NO_MANGLE = 1
 EXPECTED_RISCV_PAC_ENUM = 1
 EXPECTED_RISCV_GATES = 6
