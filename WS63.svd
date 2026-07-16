@@ -10119,7 +10119,7 @@
         </register>
         <register>
           <name>PKE_INT_NOMASK_STATUS</name>
-          <description>PKE unmasked interrupt status</description>
+          <description>PKE unmasked interrupt status; write the observed finish code to clear</description>
           <addressOffset>0x84</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
@@ -10127,13 +10127,13 @@
               <name>finish_int_nomask</name>
               <description>Finish interrupt status (expect 0x5 after completion)</description>
               <bitRange>[3:0]</bitRange>
-              <access>read-only</access>
+              <access>read-write</access>
             </field>
           </fields>
         </register>
         <register>
           <name>PKE_ALARM_STATUS</name>
-          <description>PKE alarm status register</description>
+          <description>PKE alarm status register; the documented clean code is writable</description>
           <addressOffset>0x8C</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
@@ -10141,7 +10141,7 @@
               <name>alarm_int</name>
               <description>Security alarm interrupt</description>
               <bitRange>[3:0]</bitRange>
-              <access>read-only</access>
+              <access>read-write</access>
             </field>
           </fields>
         </register>
@@ -10170,6 +10170,20 @@
               <description>Clear PKE DRAM</description>
               <bitRange>[0:0]</bitRange>
               <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PKE_DRAM_MASK</name>
+          <description>Mask word XORed with every PKE data-RAM word</description>
+          <addressOffset>0xF0</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>dram_mask</name>
+              <description>Current PKE data-RAM mask word</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-write</access>
             </field>
           </fields>
         </register>
