@@ -1,5 +1,7 @@
 """Validate WS63.svd against CMSIS-SVD schema."""
-import sys, urllib.request, os
+import subprocess
+import sys
+import urllib.request
 from pathlib import Path
 import xmlschema
 
@@ -19,6 +21,7 @@ def main() -> int:
     try:
         schema.validate(str(SVD))
         print("PASS: SVD is valid against CMSIS-SVD schema.")
+        subprocess.run([sys.executable, "check_register_contracts.py"], cwd=SVD.parent, check=True)
         return 0
     except Exception as e:
         print(f"FAIL: {e}")

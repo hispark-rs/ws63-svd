@@ -25,6 +25,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Fixed LSADC register map to contiguous layout (CTRL_0/1/8/9/11, CFG_* registers)
 
 ### Fixed
+- Correct UART0/1/2 register slots to 32-bit APB accesses and mark UART, GPIO,
+  I2C, PWM, DMA, SFC, and TSENSOR command/status registers with explicit access
+  directions instead of inheriting the device-wide read-write default.
+- Rebuild the SSI v151 SPI0/SPI1 register window from the vendor register
+  structure: the 36 data registers start at `0x2C`, and the previously omitted
+  Microwire, sample-delay, drive-edge, FIFO-level, interrupt-clear, version, and
+  extension registers are now modeled through `0xF8`.
+- Add IRQ 67 (`GLP_UART_RX_WAKE_INT`) and IRQ 68 (`TIMING_GEN_INT`), and remove
+  the duplicate PKE interrupt association from the SPACC peripheral.
 - Correct AES key-length encoding to `1/2/3` for 128/192/256 bits and model
   symmetric/KLAD completion registers as write-one-to-clear.
 - **SPI_WSR bit layout** corrected to the HiSilicon SSI v151 silicon (vendor
