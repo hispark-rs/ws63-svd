@@ -11,6 +11,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Model the read-only WLMAC receive statistics consumed by the mask-ROM
   `hh503_get_mac_rx_statistics_data` helper so diagnostics can use generated
   PAC accessors without invoking firmware callback trampolines.
+- Model read-only WLMAC receive-filter command and VAP0 station/BSSID identity
+  aliases used to diagnose post-association data-path failures without exposing
+  vendor-owned filter configuration.
 
 ### Added
 - SPACC symmetric channel 1/2 input/output descriptor rings, completion/error

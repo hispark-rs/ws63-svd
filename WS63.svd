@@ -12225,6 +12225,69 @@
       </addressBlock>
       <registers>
         <register>
+          <name>RX_FILTER_COMMAND</name>
+          <description>Read-only diagnostic view of the active MAC receive-filter command.
+            The underlying control register is programmed by the vendor WLMAC state machine;
+            this alias deliberately exposes no write capability</description>
+          <addressOffset>0x048</addressOffset>
+          <fields>
+            <field>
+              <name>command</name>
+              <description>Active vendor receive-filter command</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>VAP0_STATION_ADDRESS_TAIL</name>
+          <description>Read-only diagnostic view of station-address bytes 2 through 5 for
+            hardware VAP0</description>
+          <addressOffset>0x400</addressOffset>
+          <fields>
+            <field>
+              <name>bytes</name>
+              <description>Station-address bytes 2 through 5 in little-endian order</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>VAP0_ADDRESS_HEADS</name>
+          <description>Read-only diagnostic view combining the first two BSSID bytes in the
+            low halfword and the first two station-address bytes in the high halfword</description>
+          <addressOffset>0x404</addressOffset>
+          <fields>
+            <field>
+              <name>bssid</name>
+              <description>First two BSSID bytes in little-endian order</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>station</name>
+              <description>First two station-address bytes in little-endian order</description>
+              <bitRange>[31:16]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>VAP0_BSSID_TAIL</name>
+          <description>Read-only diagnostic view of BSSID bytes 2 through 5 for hardware
+            VAP0</description>
+          <addressOffset>0x408</addressOffset>
+          <fields>
+            <field>
+              <name>bytes</name>
+              <description>BSSID bytes 2 through 5 in little-endian order</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>RX_AMPDU_COUNT</name>
           <description>Received aggregate MPDU count; the mask-ROM helper consumes the low
             16 bits</description>
