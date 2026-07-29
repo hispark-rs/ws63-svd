@@ -33,6 +33,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Fixed LSADC register map to contiguous layout (CTRL_0/1/8/9/11, CFG_* registers)
 
 ### Fixed
+- Describe the WLMAC receive-filter register as packed control state rather than
+  the vendor helper's input command, and correct VAP0 station/BSSID address
+  fields to network byte order as verified on WS63 silicon.
 - Correct UART0/1/2 register slots to 32-bit APB accesses and mark UART, GPIO,
   I2C, PWM, DMA, SFC, and TSENSOR command/status registers with explicit access
   directions instead of inheriting the device-wide read-write default.

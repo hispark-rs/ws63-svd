@@ -12225,15 +12225,15 @@
       </addressBlock>
       <registers>
         <register>
-          <name>RX_FILTER_COMMAND</name>
-          <description>Read-only diagnostic view of the active MAC receive-filter command.
-            The underlying control register is programmed by the vendor WLMAC state machine;
-            this alias deliberately exposes no write capability</description>
+          <name>RX_FILTER_CONTROL</name>
+          <description>Read-only diagnostic view of the packed MAC receive-filter control
+            state. The mask-ROM hal_set_rx_filter_reg helper expands its command bits into
+            this register; this alias deliberately exposes no write capability</description>
           <addressOffset>0x048</addressOffset>
           <fields>
             <field>
-              <name>command</name>
-              <description>Active vendor receive-filter command</description>
+              <name>control</name>
+              <description>Active packed receive-filter control state</description>
               <bitRange>[31:0]</bitRange>
               <access>read-only</access>
             </field>
@@ -12247,7 +12247,7 @@
           <fields>
             <field>
               <name>bytes</name>
-              <description>Station-address bytes 2 through 5 in little-endian order</description>
+              <description>Station-address bytes 2 through 5 in network byte order</description>
               <bitRange>[31:0]</bitRange>
               <access>read-only</access>
             </field>
@@ -12255,19 +12255,19 @@
         </register>
         <register>
           <name>VAP0_ADDRESS_HEADS</name>
-          <description>Read-only diagnostic view combining the first two BSSID bytes in the
-            low halfword and the first two station-address bytes in the high halfword</description>
+          <description>Read-only diagnostic view combining BSSID bytes 0 and 1 in the low
+            halfword and station-address bytes 0 and 1 in the high halfword</description>
           <addressOffset>0x404</addressOffset>
           <fields>
             <field>
               <name>bssid</name>
-              <description>First two BSSID bytes in little-endian order</description>
+              <description>BSSID bytes 0 and 1 in network byte order</description>
               <bitRange>[15:0]</bitRange>
               <access>read-only</access>
             </field>
             <field>
               <name>station</name>
-              <description>First two station-address bytes in little-endian order</description>
+              <description>Station-address bytes 0 and 1 in network byte order</description>
               <bitRange>[31:16]</bitRange>
               <access>read-only</access>
             </field>
@@ -12281,7 +12281,7 @@
           <fields>
             <field>
               <name>bytes</name>
-              <description>BSSID bytes 2 through 5 in little-endian order</description>
+              <description>BSSID bytes 2 through 5 in network byte order</description>
               <bitRange>[31:0]</bitRange>
               <access>read-only</access>
             </field>
