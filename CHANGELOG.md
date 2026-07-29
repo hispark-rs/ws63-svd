@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Model the WS63 RISC-V mask-ROM instruction patch controller at
   `0xE000_0000`, including its 192 instruction comparison registers.
+- Model the read-only WLMAC receive statistics consumed by the mask-ROM
+  `hh503_get_mac_rx_statistics_data` helper so diagnostics can use generated
+  PAC accessors without invoking firmware callback trampolines.
 
 ### Added
 - SPACC symmetric channel 1/2 input/output descriptor rings, completion/error
@@ -18,6 +21,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - ARCHITECTURE.md documenting the SVD source and reproducible PAC generation pipeline
 
 ### Changed
+- Run deterministic Python postprocessing through the repository's locked
+  `uv` project instead of an ambient system Python.
 - Move the Edition 2024 `Peripherals::steal` unsafe-body fix into deterministic
   postprocessing instead of relying on `cargo fix` during regeneration.
 - Reproducible svd2rust 0.37.1 PAC generation pipeline (regen.sh + postprocess.py deterministic transforms)

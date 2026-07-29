@@ -101,6 +101,20 @@ def main() -> None:
         "write-only",
     )
 
+    wlmac = registers("WLMAC_STATS")
+    assert peripheral("WLMAC_STATS").findtext("baseAddress") == "0x44210000"
+    wlmac_offsets = {
+        "RX_AMPDU_COUNT": "0x0A38",
+        "RX_SUCCESS_MPDU_COUNT": "0x0A48",
+        "RX_FAILED_MPDU_COUNT": "0x0A4C",
+        "RX_FILTERED_MPDU_COUNT": "0x0A5C",
+        "RX_SUCCESS_MPDU_IN_AMPDU_COUNT": "0x0B3C",
+        "RX_FAILED_MPDU_IN_AMPDU_COUNT": "0x0B40",
+    }
+    for name, offset in wlmac_offsets.items():
+        assert wlmac[name].findtext("addressOffset") == offset
+    assert peripheral("WLMAC_STATS").findtext("access") == "read-only"
+
     interrupts: list[tuple[str, str, str]] = []
     for peripheral_name, p in peripherals.items():
         for interrupt in p.findall("interrupt"):

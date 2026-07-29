@@ -12212,6 +12212,101 @@
       </registers>
     </peripheral>
     <peripheral>
+      <name>WLMAC_STATS</name>
+      <description>Read-only Wi-Fi MAC receive statistics used by the WS63 mask-ROM
+        hh503_get_mac_rx_statistics_data implementation</description>
+      <baseAddress>0x44210000</baseAddress>
+      <size>32</size>
+      <access>read-only</access>
+      <addressBlock>
+        <offset>0x0000</offset>
+        <size>0x0B44</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>RX_AMPDU_COUNT</name>
+          <description>Received aggregate MPDU count; the mask-ROM helper consumes the low
+            16 bits</description>
+          <addressOffset>0x0A38</addressOffset>
+          <fields>
+            <field>
+              <name>count</name>
+              <description>Received aggregate MPDU count</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_SUCCESS_MPDU_COUNT</name>
+          <description>Received non-aggregate MPDUs with a valid FCS</description>
+          <addressOffset>0x0A48</addressOffset>
+          <fields>
+            <field>
+              <name>count</name>
+              <description>Successful received MPDU count</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_FAILED_MPDU_COUNT</name>
+          <description>Received non-aggregate MPDUs with an invalid FCS</description>
+          <addressOffset>0x0A4C</addressOffset>
+          <fields>
+            <field>
+              <name>count</name>
+              <description>Failed received MPDU count</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_FILTERED_MPDU_COUNT</name>
+          <description>MPDUs rejected by the MAC receive filter; the mask-ROM helper consumes
+            the low 16 bits</description>
+          <addressOffset>0x0A5C</addressOffset>
+          <fields>
+            <field>
+              <name>count</name>
+              <description>Filtered received MPDU count</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_SUCCESS_MPDU_IN_AMPDU_COUNT</name>
+          <description>MPDUs with a valid FCS received inside an aggregate</description>
+          <addressOffset>0x0B3C</addressOffset>
+          <fields>
+            <field>
+              <name>count</name>
+              <description>Successful MPDUs inside aggregate count</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_FAILED_MPDU_IN_AMPDU_COUNT</name>
+          <description>MPDUs with an invalid FCS received inside an aggregate</description>
+          <addressOffset>0x0B40</addressOffset>
+          <fields>
+            <field>
+              <name>count</name>
+              <description>Failed MPDUs inside aggregate count</description>
+              <bitRange>[31:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
       <name>BT_EM_CTL</name>
       <description>Bluetooth exchange-memory control used while changing shared RAM ownership</description>
       <baseAddress>0x49003000</baseAddress>

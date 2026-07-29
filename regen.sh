@@ -9,7 +9,8 @@
 # Pipeline:
 #   1. svd2rust 0.37.1   WS63.svd --target riscv --settings ws63-settings.yaml
 #   2. rustfmt           format the raw (unformatted) svd2rust output
-#   3. postprocess.py    strip 5 dup TIMER accessors + #[no_mangle] -> #[unsafe(..)]
+#   3. uv run postprocess.py
+#                         strip 5 dup TIMER accessors + #[no_mangle] -> #[unsafe(..)]
 #   4. install           copy deterministic postprocessed output into the PAC
 #   5. cargo fmt
 #   6. build + clippy gate (rt + critical-section features)
@@ -44,7 +45,7 @@ trap 'rm -rf "$WORK"' EXIT
 need() { command -v "$1" >/dev/null 2>&1 || { echo "missing tool: $1 ($2)" >&2; exit 1; }; }
 need svd2rust "cargo install svd2rust@0.37.1"
 need cargo    "rustup / ws63 toolchain"
-need python3  "system python"
+need uv       "https://docs.astral.sh/uv/getting-started/installation/"
 
 ver="$(svd2rust --version | awk '{print $2}')"
 [ "$ver" = "0.37.1" ] || echo "WARNING: svd2rust $ver != pinned 0.37.1 — diff may differ" >&2
@@ -59,7 +60,7 @@ echo "── 2. rustfmt (svd2rust output is unformatted) ───────�
 rustfmt --edition 2024 "$WORK/lib.rs"
 
 echo "── 3. postprocess (deterministic text fixups) ───────────"
-python3 "$HERE/postprocess.py" "$WORK/lib.rs"
+uv run --project "$HERE" "$HERE/postprocess.py" "$WORK/lib.rs"
 
 echo "── 4. install deterministic output ─────────────────"
 cp "$WORK/lib.rs" "$PAC_LIB"
