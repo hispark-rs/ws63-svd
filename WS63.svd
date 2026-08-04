@@ -12342,6 +12342,62 @@
           </fields>
         </register>
         <register>
+          <name>RX_REPLAY_FAILURE_COUNT</name>
+          <description>Receive replay failures reported by the MAC statistics helper. The
+            WS63 mask-ROM hh503_get_mac_statistics_data implementation reads this register;
+            TKIP occupies the high halfword and CCMP the low halfword</description>
+          <addressOffset>0x0A70</addressOffset>
+          <fields>
+            <field>
+              <name>ccmp</name>
+              <description>CCMP replay failure count</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>tkip</name>
+              <description>TKIP replay failure count</description>
+              <bitRange>[31:16]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_MIC_FAILURE_COUNT</name>
+          <description>Receive MIC failures reported by the MAC statistics helper. The WS63
+            mask-ROM hh503_get_mac_statistics_data implementation reads this register; TKIP
+            occupies the high halfword and CCMP the low halfword</description>
+          <addressOffset>0x0A74</addressOffset>
+          <fields>
+            <field>
+              <name>ccmp</name>
+              <description>CCMP MIC failure count</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>tkip</name>
+              <description>TKIP MIC failure count</description>
+              <bitRange>[31:16]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_KEY_SEARCH_FAILURE_COUNT</name>
+          <description>Receive key-search failures reported by the WS63 mask-ROM
+            hh503_get_mac_statistics_data implementation</description>
+          <addressOffset>0x0A7C</addressOffset>
+          <fields>
+            <field>
+              <name>count</name>
+              <description>Receive key-search failure count</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>RX_SUCCESS_MPDU_IN_AMPDU_COUNT</name>
           <description>MPDUs with a valid FCS received inside an aggregate</description>
           <addressOffset>0x0B3C</addressOffset>
