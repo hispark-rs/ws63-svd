@@ -36,7 +36,8 @@
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>SLE_INT</name>
+        <name>GLE_INT</name>
+        <description>BGLE baseband interrupt (BT_BB_GLE_IRQN in the vendor SDK)</description>
         <value>47</value>
       </interrupt>
       <interrupt>
