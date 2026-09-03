@@ -11062,14 +11062,6 @@
           </fields>
         </register>
         <register>
-          <name>KC_REECPU_FLUSH_BUSY</name><description>REE keyslot flush status</description><addressOffset>0x1B14</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
-          <fields>
-            <field><name>flush_busy</name><description>Keyslot flush is in progress</description><bitRange>[0:0]</bitRange><access>read-only</access></field>
-            <field><name>unlock_fail</name><description>Last keyslot unlock failed</description><bitRange>[1:1]</bitRange><access>read-only</access></field>
-            <field><name>timeout_error</name><description>Last keyslot flush timed out</description><bitRange>[2:2]</bitRange><access>read-only</access></field>
-          </fields>
-        </register>
-        <register>
           <name>KC_PCPU_LOCK_CMD</name>
           <description>PCPU keyslot lock command</description>
           <addressOffset>0x1B08</addressOffset>
@@ -11131,6 +11123,38 @@
               <bitRange>[20:20]</bitRange>
               <access>write-only</access>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>KC_TEECPU_FLUSH_BUSY</name><description>TEE CPU keyslot flush status</description><addressOffset>0x1B10</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>flush_busy</name><description>Keyslot flush is in progress</description><bitRange>[0:0]</bitRange><access>read-only</access></field>
+            <field><name>unlock_fail</name><description>Last keyslot unlock failed</description><bitRange>[1:1]</bitRange><access>read-only</access></field>
+            <field><name>timeout_error</name><description>Last keyslot flush timed out</description><bitRange>[2:2]</bitRange><access>read-only</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>KC_REECPU_FLUSH_BUSY</name><description>REE CPU keyslot flush status</description><addressOffset>0x1B14</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>flush_busy</name><description>Keyslot flush is in progress</description><bitRange>[0:0]</bitRange><access>read-only</access></field>
+            <field><name>unlock_fail</name><description>Last keyslot unlock failed</description><bitRange>[1:1]</bitRange><access>read-only</access></field>
+            <field><name>timeout_error</name><description>Last keyslot flush timed out</description><bitRange>[2:2]</bitRange><access>read-only</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>KC_PCPU_FLUSH_BUSY</name><description>PCPU keyslot flush status</description><addressOffset>0x1B18</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>flush_busy</name><description>Keyslot flush is in progress</description><bitRange>[0:0]</bitRange><access>read-only</access></field>
+            <field><name>unlock_fail</name><description>Last keyslot unlock failed</description><bitRange>[1:1]</bitRange><access>read-only</access></field>
+            <field><name>timeout_error</name><description>Last keyslot flush timed out</description><bitRange>[2:2]</bitRange><access>read-only</access></field>
+          </fields>
+        </register>
+        <register>
+          <name>KC_AIDSP_FLUSH_BUSY</name><description>AIDSP keyslot flush status</description><addressOffset>0x1B1C</addressOffset><access>read-only</access><resetValue>0x00000000</resetValue>
+          <fields>
+            <field><name>flush_busy</name><description>Keyslot flush is in progress</description><bitRange>[0:0]</bitRange><access>read-only</access></field>
+            <field><name>unlock_fail</name><description>Last keyslot unlock failed</description><bitRange>[1:1]</bitRange><access>read-only</access></field>
+            <field><name>timeout_error</name><description>Last keyslot flush timed out</description><bitRange>[2:2]</bitRange><access>read-only</access></field>
           </fields>
         </register>
         <register>

@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   vendor-owned filter configuration.
 
 ### Added
+- Model the TEE, REE, PCPU, and AIDSP keyslot flush status registers from the
+  vendor `kc_flush_busy` definition, including busy, unlock-failure, and
+  timeout-error fields.
 - SPACC symmetric channel 1/2 input/output descriptor rings, completion/error
   status, and the KM/KLAD clear-key and MCipher keyslot registers used by AES.
 - Shared-RAM ownership fields for `CFG_RAM_CKEN` / `CFG_RAM_SEL` and the missing

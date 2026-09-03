@@ -80,6 +80,18 @@ def main() -> None:
     require_access("SFC_CFG", ["INT_CLEAR"], "write-only")
     require_access("TSENSOR", ["TSENSOR_CTL_ID", "TSENSOR_TEMP_INT_STS"], "read-only")
     require_access("TSENSOR", ["TSENSOR_START", "TSENSOR_TEMP_INT_CLR"], "write-only")
+
+    km = registers("KM")
+    km_flush_busy_offsets = {
+        "KC_TEECPU_FLUSH_BUSY": "0x1B10",
+        "KC_REECPU_FLUSH_BUSY": "0x1B14",
+        "KC_PCPU_FLUSH_BUSY": "0x1B18",
+        "KC_AIDSP_FLUSH_BUSY": "0x1B1C",
+    }
+    for name, offset in km_flush_busy_offsets.items():
+        assert km[name].findtext("addressOffset") == offset
+    require_access("KM", list(km_flush_busy_offsets), "read-only")
+
     require_access(
         "PWM",
         [
