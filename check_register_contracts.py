@@ -81,6 +81,17 @@ def main() -> None:
     require_access("TSENSOR", ["TSENSOR_CTL_ID", "TSENSOR_TEMP_INT_STS"], "read-only")
     require_access("TSENSOR", ["TSENSOR_START", "TSENSOR_TEMP_INT_CLR"], "write-only")
 
+    # WS63 SDK target config defines CONFIG_TCXO_WITH_TWO_DATA_REGS. Keep the
+    # old 16-bit accessors for API compatibility, and expose each complete word.
+    tcxo = registers("TCXO")
+    for index, offset in ((0, "0x04"), (1, "0x08")):
+        reg = tcxo[f"TCXO_COUNT{index}"]
+        assert reg.findtext("addressOffset") == offset
+        fields = {field.findtext("name"): field for field in reg.findall("./fields/field")}
+        assert fields[f"count{index}"].findtext("bitRange") == "[15:0]"
+        assert fields[f"count{index}_full"].findtext("bitRange") == "[31:0]"
+        assert fields[f"count{index}_full"].findtext("access") == "read-only"
+
     km = registers("KM")
     km_flush_busy_offsets = {
         "KC_TEECPU_FLUSH_BUSY": "0x1B10",
