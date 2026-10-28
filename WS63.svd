@@ -11331,41 +11331,53 @@
         </register>
         <register>
           <name>TCXO_COUNT0</name>
-          <description>TCXO count bits [15:0]</description>
+          <description>TCXO counter bits [31:0] in the WS63 two-data-register SDK profile</description>
           <addressOffset>0x04</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>count0</name>
-              <description>Counter value bits [15:0]</description>
+              <description>Legacy accessor for the low 16 bits of counter bits [31:0]; use count0_full for the complete word</description>
               <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>count0_full</name>
+              <description>Complete counter value bits [31:0]</description>
+              <bitRange>[31:0]</bitRange>
               <access>read-only</access>
             </field>
           </fields>
         </register>
         <register>
           <name>TCXO_COUNT1</name>
-          <description>TCXO count bits [31:16]</description>
+          <description>TCXO counter bits [63:32] in the WS63 two-data-register SDK profile</description>
           <addressOffset>0x08</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>count1</name>
-              <description>Counter value bits [31:16]</description>
+              <description>Legacy accessor for the low 16 bits of counter bits [63:32]; use count1_full for the complete word</description>
               <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>count1_full</name>
+              <description>Complete counter value bits [63:32]</description>
+              <bitRange>[31:0]</bitRange>
               <access>read-only</access>
             </field>
           </fields>
         </register>
         <register>
           <name>TCXO_COUNT2</name>
-          <description>TCXO count bits [47:32]</description>
+          <description>Legacy compatibility accessor; not used by the WS63 two-data-register SDK profile, semantics unverified</description>
           <addressOffset>0x0C</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>count2</name>
-              <description>Counter value bits [47:32]</description>
+              <description>Legacy field; semantics unverified for the WS63 two-data-register profile</description>
               <bitRange>[15:0]</bitRange>
               <access>read-only</access>
             </field>
@@ -11373,13 +11385,13 @@
         </register>
         <register>
           <name>TCXO_COUNT3</name>
-          <description>TCXO count bits [63:48]</description>
+          <description>Legacy compatibility accessor; not used by the WS63 two-data-register SDK profile, semantics unverified</description>
           <addressOffset>0x10</addressOffset>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>count3</name>
-              <description>Counter value bits [63:48]</description>
+              <description>Legacy field; semantics unverified for the WS63 two-data-register profile</description>
               <bitRange>[15:0]</bitRange>
               <access>read-only</access>
             </field>
